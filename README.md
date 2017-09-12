@@ -11,6 +11,5 @@ Edited readme
 
 ~~strikeout~~ 
 
-We can even include gifs. Fancy that?
 
 ![](https://media.giphy.com/media/xTiTnoUnHxVaaVNWhO/giphy.gif)
