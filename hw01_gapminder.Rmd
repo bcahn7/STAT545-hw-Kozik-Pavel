@@ -84,7 +84,7 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 
 
 |    **Continent**    | **Mean Life Expectacy in 1952** | **Mean Life Expectancy in 2007 **| **Life Expectancy Increase**| **Relative ranking**
-  |----|---------------|---------------|--------------|------------|-|
+  |----|--------------------|---------------------|----------------|---|
   |Africa          | 39.14 |54.81| 15.67|3|
   |Americas        | 53.28 |73.81| 20.53|2|
   |Asia            | 46.31 |70.73|24.42|1|
@@ -129,7 +129,8 @@ Whether this halted progression may in part be influencing life expectancy rate 
 
 According to more recent 2016 statisics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a GDP of 2.18, a value comparable to the above figure. Whether or not Africa has in turn had an increase in life expectancy would be worth considering.
 
-<center>![](http://stat545.com/static/img/stat545-logo-s.png)</center>
+![](http://stat545.com/static/img/stat545-logo-s.png)
+
 &nbsp;
 
 

@@ -10,7 +10,7 @@ In this assignment we will be looking at the [**gapminder**](https://cran.r-proj
 Life Expectacy Over Decades
 </h3>
 </center>
-<img src="Homework1_-_Notcorrupted_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
 
        
 
@@ -27,7 +27,7 @@ A more nuanced distinction however may be made by considering the growth rates o
 Life Expectacy Across Continents
 </h3>
 </center>
-<img src="Homework1_-_Notcorrupted_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
        
 
@@ -35,14 +35,13 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 
    
 
-<table style="width:93%;">
+<table style="width:96%;">
 <colgroup>
 <col width="6%" />
-<col width="22%" />
-<col width="22%" />
-<col width="20%" />
-<col width="18%" />
-<col width="2%" />
+<col width="29%" />
+<col width="30%" />
+<col width="23%" />
+<col width="5%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -60,7 +59,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 <td>54.81</td>
 <td>15.67</td>
 <td>3</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Americas</td>
@@ -68,7 +66,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 <td>73.81</td>
 <td>20.53</td>
 <td>2</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>Asia</td>
@@ -76,7 +73,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 <td>70.73</td>
 <td>24.42</td>
 <td>1</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Europe</td>
@@ -84,7 +80,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 <td>77.65</td>
 <td>13.24</td>
 <td>4</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>Oceania</td>
@@ -92,7 +87,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 <td>80.72</td>
 <td>11.46</td>
 <td>5</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -108,7 +102,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="Homework1_-_Notcorrupted_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />  
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />  
 
 ***note***. Error bars were not included to avoid an overly cluttered figure.    
 
@@ -118,6 +112,4 @@ Whether this halted progression may in part be influencing life expectancy rate 
 
 According to more recent 2016 statisics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a GDP of 2.18, a value comparable to the above figure. Whether or not Africa has in turn had an increase in life expectancy would be worth considering.
 
-<center>
 ![](http://stat545.com/static/img/stat545-logo-s.png)
-</center>
