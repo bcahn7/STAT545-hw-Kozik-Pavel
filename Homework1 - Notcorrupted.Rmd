@@ -1,8 +1,6 @@
 ---
-title: 'Homework 1: Life Expectacy'
-output:
-  html_document: default
-  pdf_document: default
+title: "Homework 1: Life Expectacy"
+output: github_document
 ---
 
 
