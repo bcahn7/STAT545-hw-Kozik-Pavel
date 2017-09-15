@@ -12,7 +12,7 @@ Life Expectacy Over Decades
 </center>
 <img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
 
-       
+   
 
 As we can see life expectancy has increased by roughly 15 years since study onset.
 
@@ -20,7 +20,7 @@ As we can see life expectancy has increased by roughly 15 years since study onse
 
 A more nuanced distinction however may be made by considering the growth rates of different *continents*.
 
-   
+ 
 
 <center>
 <h3>
@@ -29,11 +29,11 @@ Life Expectacy Across Continents
 </center>
 <img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
-       
+   
 
 Visually a trend seems apparent. Continents like Asia and America had a larger increase in life expectancy than did Europe and Oceania. Thus while life expectacy has increased the most noticable difference seems to be in continents that started with a lower life expectancy.
 
-   
+ 
 
 <table style="width:96%;">
 <colgroup>
@@ -95,14 +95,14 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 
 Somewhat puzzling to this interpretation however is that Africa although having the lowest life expectancy only showed intermediate increase. One notable difference is that unlike the other continents, Africa did not have nearly as pronounced an increase in *gross domestic product (GDP)* over the years.
 
-   
+ 
 
 <center>
 <h3>
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />  
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 ***note***. Error bars were not included to avoid an overly cluttered figure.    
 
