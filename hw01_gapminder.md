@@ -23,8 +23,6 @@ Life Expectacy Over Decades
 
 As we can see life expectancy has increased by roughly 15 years since study onset.
 
- 
-
 A more nuanced distinction however may be made by considering the growth rates of different *continents*.
 
  
@@ -34,7 +32,7 @@ A more nuanced distinction however may be made by considering the growth rates o
 Life Expectacy Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />                              <font size="-1"> ***note***. Error bars represent +/- 1 one standard error of the mean. </font>
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars represent +/- 1 one standard error of the mean.
 
 were not included to avoid an overly cluttered figure.
 
@@ -111,7 +109,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD                          <font size="-5"> Error bars were not included to avoid an overly cluttered figure. =======                              <font size="-1"> ***note***. Error bars were not included to avoid an overly cluttered figure. &gt;&gt;&gt;&gt;&gt;&gt;&gt; 829ce59d273477ac945e9e434de2c30b658591b1 </font>
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars were not included to avoid an overly cluttered figure.
 
    
 

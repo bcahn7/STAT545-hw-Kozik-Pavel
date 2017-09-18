@@ -52,8 +52,6 @@ LifeByYear + stat_summary(fun.y = mean, geom = "point", size = 4) +
 
 As we can see life expectancy has increased by roughly 15 years since study onset.
 
-&nbsp;
-
 A more nuanced distinction however may be made by considering the growth rates of different *continents*. 
 
 &nbsp;
@@ -78,9 +76,7 @@ LifeByYear2  +
 ```
 &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***note***. Error bars represent +/- 1 one standard error of the mean.
 
-
 were not included to avoid an overly cluttered figure.
-
 
 &nbsp;
 &nbsp;
@@ -104,7 +100,6 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 Somewhat puzzling to this interpretation however is that Africa although having the lowest life expectancy only showed intermediate increase. One notable difference is that unlike the other continents, Africa did not have nearly as pronounced an increase in *gross domestic product (GDP)* over the years. 
 
 &nbsp;
-
 
 <center> <h3>GDP Across Continents</h3> </center>
 
@@ -135,8 +130,6 @@ Whether this halted progression may in part be influencing life expectancy rate 
 &nbsp;
 
 According to more recent 2016 statisics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a GDP of 2.18, a value comparable to the above figure. Whether or not Africa has in turn had an increase in life expectancy would be worth considering.
-
-
 
 &nbsp;
 
