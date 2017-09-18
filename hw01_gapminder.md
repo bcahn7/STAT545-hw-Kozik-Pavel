@@ -111,7 +111,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />       ***note***. Error bars were not included to avoid an overly cluttered figure.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /> ***note***. Error bars were not included to avoid an overly cluttered figure.
 
    
 

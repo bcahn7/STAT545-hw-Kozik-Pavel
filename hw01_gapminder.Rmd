@@ -120,7 +120,7 @@ GDPByYear  +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp; &nbsp; &nbsp; ***note***. Error bars were not included to avoid an overly cluttered figure.
+***note***. Error bars were not included to avoid an overly cluttered figure.
 
 
 &nbsp;
