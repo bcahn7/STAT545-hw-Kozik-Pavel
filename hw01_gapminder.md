@@ -21,6 +21,10 @@ Life Expectacy Over Decades
 
    
 
+As we can see life expectancy has increased by roughly 15 years since study onset.
+
+ 
+
 A more nuanced distinction however may be made by considering the growth rates of different *continents*.
 
  

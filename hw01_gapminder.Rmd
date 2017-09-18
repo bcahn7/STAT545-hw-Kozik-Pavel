@@ -51,6 +51,10 @@ LifeByYear + stat_summary(fun.y = mean, geom = "point", size = 4) +
 &nbsp;
 &nbsp;
 
+As we can see life expectancy has increased by roughly 15 years since study onset.
+
+&nbsp;
+
 A more nuanced distinction however may be made by considering the growth rates of different *continents*. 
 
 &nbsp;
@@ -123,6 +127,7 @@ GDPByYear  +
 ```
 &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <font size="-1"> ***note***. Error bars were not included to avoid an overly cluttered figure.
 </font>
+
 
 &nbsp;
 &nbsp;
