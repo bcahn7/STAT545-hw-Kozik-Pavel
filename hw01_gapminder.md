@@ -10,6 +10,8 @@ I am a third year PhD student in cognitive psychology. During my free time I enj
 </p>
 I also enjoy climbing, running and rainy weather.
 
+ 
+
 In this assignment I will look at the [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set in which *life expectancy* was measured from the early *1950s to 2007*.
 
 <center>

@@ -13,6 +13,8 @@ I am a third year PhD student in cognitive psychology. During my free time I enj
 
 I also enjoy climbing, running and rainy weather. 
 
+&nbsp;
+
 In this assignment I will look at the  [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set in which *life expectancy* was measured from the early *1950s to 2007*. 
 
 <center> <h3>Life Expectacy Over Decades </h3> </center>
@@ -45,7 +47,8 @@ LifeByYear + stat_summary(fun.y = mean, geom = "point", size = 4) +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***note***. Error bars represent +/- 1 one standard error of the mean.
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+***note***. Error bars represent +/- 1 one standard error of the mean.
 
 &nbsp;
 &nbsp;
@@ -118,7 +121,8 @@ GDPByYear  +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***note***. Error bars were not included to avoid an overly cluttered figure.
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+***note***. Error bars were not included to avoid an overly cluttered figure.
 
 
 &nbsp;
