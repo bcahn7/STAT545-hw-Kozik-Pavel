@@ -17,7 +17,7 @@ In this assignment I will look at the [**gapminder**](https://cran.r-project.org
 Life Expectacy Over Decades
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />                              <font size="-1"> ***note***. Error bars represent +/- 1 one standard error of the mean. </font>
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars represent +/- 1 one standard error of the mean.
 
    
 
@@ -111,7 +111,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />                              <font size="-5"> Error bars were not included to avoid an overly cluttered figure. </font>
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD                          <font size="-5"> Error bars were not included to avoid an overly cluttered figure. =======                              <font size="-1"> ***note***. Error bars were not included to avoid an overly cluttered figure. &gt;&gt;&gt;&gt;&gt;&gt;&gt; 829ce59d273477ac945e9e434de2c30b658591b1 </font>
 
    
 

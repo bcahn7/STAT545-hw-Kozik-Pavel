@@ -45,8 +45,7 @@ LifeByYear + stat_summary(fun.y = mean, geom = "point", size = 4) +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <font size="-1"> ***note***. Error bars represent +/- 1 one standard error of the mean.
-</font>
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***note***. Error bars represent +/- 1 one standard error of the mean.
 
 &nbsp;
 &nbsp;
@@ -77,8 +76,8 @@ LifeByYear2  +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <font size="-1"> ***note***. Error bars represent +/- 1 one standard error of the mean.
-</font>
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;***note***. Error bars represent +/- 1 one standard error of the mean.
+
 
 
 were not included to avoid an overly cluttered figure.
@@ -125,8 +124,7 @@ GDPByYear  +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="-5"> Error bars were not included to avoid an overly cluttered figure.
-</font>
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ***note***. Error bars were not included to avoid an overly cluttered figure.
 
 
 &nbsp;
