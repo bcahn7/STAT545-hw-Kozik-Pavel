@@ -47,7 +47,7 @@ LifeByYear + stat_summary(fun.y = mean, geom = "point", size = 4) +
         axis.title.x = element_text(colour="grey20",size=15,angle=0,face="plain"),
         axis.title.y = element_text(colour="grey20",size=15,angle=90,face="plain"))
 ```
-***note***. Error bars represent +/- 1 one standard error of the mean.
+***note.***  Error bars represent +/- 1 one standard error of the mean.
 
 &nbsp;
 &nbsp;
