@@ -21,6 +21,10 @@ Life Expectacy Over Decades
 
    
 
+As we can see life expectancy has increased by roughly 15 years since study onset.
+
+ 
+
 A more nuanced distinction however may be made by considering the growth rates of different *continents*.
 
  
@@ -107,7 +111,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />                              <font size="-1"> ***note***. Error bars were not included to avoid an overly cluttered figure. </font>
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />                              <font size="-3"> Error bars were not included to avoid an overly cluttered figure. </font>
 
    
 
