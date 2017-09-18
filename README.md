@@ -6,4 +6,6 @@ In the follow up class R markdown was introduced and I from there made all chang
 
 E.g. when using R and pressing knit the code "<center> <h3>GDP Across Continents</h3> </center>" creates centered text. However when pushing to github, the text is no longer centered. This was a bit confusing as I had been using the knit option as a preview of what I expected on github. 
 
+Also, is there a benefit to using **italics** vs. <i> italics</i> and other like such commands.
+
 This final  portion of the assignment was written via browser.
