@@ -19,7 +19,7 @@ In this assignment I will look at the [**gapminder**](https://cran.r-project.org
 Life Expectacy Over Decades
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars represent +/- 1 one standard error of the mean.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /> ***note***. Error bars represent +/- 1 one standard error of the mean.
 
    
 
@@ -34,7 +34,7 @@ A more nuanced distinction however may be made by considering the growth rates o
 Life Expectacy Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars represent +/- 1 one standard error of the mean.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /> ***note***. Error bars represent +/- 1 one standard error of the mean.
 
 were not included to avoid an overly cluttered figure.
 
@@ -111,7 +111,7 @@ Somewhat puzzling to this interpretation however is that Africa although having 
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />                              ***note***. Error bars were not included to avoid an overly cluttered figure.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />       ***note***. Error bars were not included to avoid an overly cluttered figure.
 
    
 
