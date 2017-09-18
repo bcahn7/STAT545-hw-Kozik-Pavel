@@ -19,7 +19,9 @@ In this assignment I will look at the [**gapminder**](https://cran.r-project.org
 Life Expectacy Over Decades
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /> ***note.*** Error bars represent +/- 1 one standard error of the mean.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+
+<b><i>**note.**</b></i> Error bars represent +/- 1 one standard error of the mean.
 
    
 
