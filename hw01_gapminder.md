@@ -1,6 +1,7 @@
-Homework 1: Life Expectacy
+Homework 1: Gapminder
 ================
 
+ 
 
 In this assignment I will look at the [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are avaliable,
 
