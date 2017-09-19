@@ -29,6 +29,9 @@ I initially began this homework assignment via the github browser. Once the clas
 
 I then used what was avaliable on the [**sample template**](https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/hw01_sample_readme.md) to model my own work from. Much of what was here was useful. Issues I encountered were googled for solutions but no particular tutorial was used.
 
+I did however spend some time learning and reviewing [**ggplot**](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+ and various summary statistics it can graph.
 
-One issue I had was learning to center items. For instance, centering an image is different than centering a figure embedded within R code. Centering an image requires using the < center > command whereas centering a figure embedded in R required using fig.align="center". 
+
+One issue I had was learning to center items. For instance, centering an image is different than centering a figure embedded within R code. Centering an image requires using the < center > command whereas centering a figure embedded in R required using fig.align="center". Similarly sometimes text was too distant from images.
 

@@ -1,11 +1,11 @@
 Homework 1: Gapminder
 ================
 
-  In this assignment I will look at the [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are avaliable,
+  In this assignment I will look at the [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are available,
 
     ## [1] "country"   "continent" "year"      "lifeExp"   "pop"       "gdpPercap"
 
-and their respecitve formats.
+and their respective formats.
 
     ## Classes 'tbl_df', 'tbl' and 'data.frame':    1704 obs. of  6 variables:
     ##  $ country  : Factor w/ 142 levels "Afghanistan",..: 1 1 1 1 1 1 1 1 1 1 ...
@@ -46,7 +46,7 @@ and a few descriptive statistics.
     ##  Max.   :1.319e+09   Max.   :113523.1  
     ## 
 
-On seeing what the dataset contains, we can ask has *life expectancy* changed from the early *1950s to 2007*.
+On seeing what the data set contains we can now ask specific questions. For instance, has has *life expectancy* changed from the early *1950s to 2007*.
 
 <center>
 <h3>
@@ -55,9 +55,15 @@ Life Expectancy Over Decades
 </center>
 <img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
+Looking at this scatter plot a rough trend does seem evident. Let us try and better visually summarize this by creating a figure where mean life expectancy is plotted for each year.
+
+ 
+
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
 <b><i>note.</b></i> Error bars represent +/- 1 one standard error of the mean.
 
-As we can see life expectancy has increased by roughly 15 years since study onset. A more nuanced distinction however may be made by considering the growth rates of different *continents*.
+As we can see life expectancy has increased each year, resulting in gain of roughly 15 years since study onset. A more nuanced distinction however may be made by considering the growth rates of different *continents*.
 
  
 
@@ -66,9 +72,9 @@ As we can see life expectancy has increased by roughly 15 years since study onse
 Life Expectancy Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /> <b><i>note.</b></i> Error bars represent +/- 1 one standard error of the mean.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /> <b><i>note.</b></i> Error bars represent +/- 1 one standard error of the mean.
 
-Visually a trend seems apparent. Continents like Asia and America had a larger increase in life expectancy than did Europe and Oceania. Interestingly these continents also started the study with a lower life expectancy.
+Visually a trend seems apparent. Continents like Asia and America had larger increases in life expectancy than did Europe and Oceania. Interestingly Asia and America both also had a lower life expectancy at study start. Perhaps then, continents that started with a lower life expectancy had an opportunity for greater gains over the years. A ranking of average life expectancy increase is provided in the table below.
 
  
 
@@ -128,7 +134,7 @@ Visually a trend seems apparent. Continents like Asia and America had a larger i
 </tbody>
 </table>
 
-Somewhat puzzling however is that Africa although having the lowest life expectancy only showed an intermediate increase. One notable difference is that unlike the other continents Africa did not have nearly as pronounced an increase in *gross domestic product (GDP)* over the years.
+Overall it would seem that continents with lower life expectancy saw greater gains over the years than continents with already high life expectancy. Somewhat puzzling however is that Africa although having the lowest life expectancy only showed an intermediate increase. Why might this be? One notable difference is that unlike the other continents Africa did not have nearly as pronounced an increase in *gross domestic product (GDP)* over the years.
 
  
 
@@ -137,8 +143,8 @@ Somewhat puzzling however is that Africa although having the lowest life expecta
 GDP Across Continents
 </h3>
 </center>
-<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /> <b><i>note.</b></i> Error bars were not included to avoid an overly cluttered figure.
+<img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /> <b><i>note.</b></i> Error bars were not included to avoid an overly cluttered figure.
 
-Whether Africa did not see as steady an increase in life expectancy is attributable to a halted GDP rise would seem tenable.
+Whether Africa did not see as steady an increase in life expectancy is attributable to a halted GDP would seem tenable.
 
 According to more recent 2016 statistics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a GDP of 2.18. One might expect that as GDP has not greatly changed since the 2007 measurement, perhaps neither has life expectancy.
