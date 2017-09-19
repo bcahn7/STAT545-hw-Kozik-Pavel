@@ -4,7 +4,7 @@ author: "Pavel Kozik"
 output: github_document
 ---
 
-<center>*Homework Introduction*</center>
+*Homework Introduction*
 
 This repository was created by Pavel Kozik to complete the first [**STATS 545**](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) homework assignment.
 
