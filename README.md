@@ -27,7 +27,7 @@ For this assignment I examined gapminder data through R markdown, [**click here 
 
 I initially began this homework assignment via the github browser. Once the class was introduced to R markdown however, most of my changes came from there. Later on I intentionally alternated to try and be comfortable working both via browser and R. 
 
-I then used what was avaliable on the [**sample template**](https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/hw01_sample_readme.md) to model my own work from. Much of what was here was useful. Issues I encountered were googled for solutions but no particular tutorial was used.
+I then used what was avaliable on the [**sample template**](https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/hw01_sample_readme.md) to model my own work. Much of what was here was useful. Issues I encountered were googled but no particular tutorial or resource was used.
 
 I did however spend some time learning and reviewing [**ggplot**](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
  and various summary statistics it can graph.
