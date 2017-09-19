@@ -8,7 +8,7 @@ output: github_document
 
 This repository was created by Pavel Kozik to complete the first [***STATS 545***](http://stat545.com/) homework assignment.
 
-I am a third year PhD student in cognitive psychology. During my free time I enjoy reading, and am currently reading the [***metamorphosis***](https://www.goodreads.com/book/show/485894.The_Metamorphosis) by Franz Kafka. 
+I am a third year PhD student in cognitive psychology. During my free time I enjoy reading, and am currently reading the [***metamorphosis***](https://www.goodreads.com/book/show/485894.The_Metamorphosis) by *Franz Kafka*. 
 
 
 <p align="center">
