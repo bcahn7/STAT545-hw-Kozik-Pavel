@@ -1,12 +1,12 @@
-# STAT545-hw01-Kozik-Pavel
 ---
 title: "Homework 1: Introduction"
+author: "Pavel Kozik"
 output: github_document
 ---
 
 ***Homework Introduction***
 
-This repository was created by Pavel Kozik to complete the first [**STATS 545**](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) homework assignment.
+This repository was created by Pavel Kozik to complete the *first* [**STATS 545**](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) homework assignment.
 
 I am a third year PhD student in cognitive psychology. During my free time I enjoy reading, and am currently reading the [**metamorphosis**](https://www.goodreads.com/book/show/485894.The_Metamorphosis) by Franz Kafka. 
 
