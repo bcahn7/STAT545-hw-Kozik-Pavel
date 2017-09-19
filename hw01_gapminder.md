@@ -74,9 +74,7 @@ Life Expectancy Across Continents
 </center>
 <img src="hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /> <b><i>note.</b></i> Error bars represent +/- 1 one standard error of the mean.
 
- 
-
-Visually a trend seems apparent. Continents like Asia and America had larger increases in life expectancy than did Europe and Oceania. Interestingly Asia and America both also had a lower life expectancy at study start. Perhaps then, continents that started with a lower life expectancy had an opportunity for greater gains over the years. A ranking of average life expectancy increase is provided in the table below.
+  Visually a trend seems apparent. Continents like Asia and America had larger increases in life expectancy than did Europe and Oceania. Interestingly Asia and America both also had a lower life expectancy at study start. Perhaps then, continents that started with a lower life expectancy had an opportunity for greater gains over the years. A ranking of average life expectancy increase is provided in the table below.
 
  
 
