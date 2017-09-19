@@ -46,7 +46,7 @@ and a few descriptive statistics.
     ##  Max.   :1.319e+09   Max.   :113523.1  
     ## 
 
-On seeing what the data set contains we can now ask specific questions. For instance, has has *life expectancy* changed from the early *1950s to 2007*.
+On seeing what the data set contains we can now ask specific questions. For instance, has *life expectancy* changed from the early *1950s to 2007*.
 
 <center>
 <h3>
@@ -147,4 +147,4 @@ GDP Across Continents
 
 Whether Africa did not see as steady an increase in life expectancy is attributable to a halted GDP would seem tenable.
 
-According to more recent 2016 statistics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a GDP of 2.18. One might expect that as GDP has not greatly changed since the 2007 measurement, perhaps neither has life expectancy.
+According to more recent 2016 statistics provided by the [**International Monetary Fund**](http://www.imf.org/external/datamapper/NGDPD@WEO/OEMDC/ADVEC/WEOWORLD/AFQ) Africa currently has a similar GDP as in the 2007 measurement. One might expect and hypothesize that as GDP has not greatly changed since the 2007 measurement, perhaps neither has life expectancy.
