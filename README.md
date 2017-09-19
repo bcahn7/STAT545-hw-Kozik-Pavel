@@ -21,7 +21,7 @@ I am a third year PhD student in cognitive psychology. During my free time I enj
 - running 
 - and rainy weather.
 
-For this assignment I used gapminder data and R markdown, [**click here to see the results**](https://github.com/Kozp/STAT545-hw01-Kozik-Pavel/blob/Side-Branch/hw01_gapminder.md) 
+For this assignment I examined gapminder data through R markdown, [**click here to see the results**](https://github.com/Kozp/STAT545-hw01-Kozik-Pavel/blob/Side-Branch/hw01_gapminder.md) 
 
 # Process Report & Reflections
 
