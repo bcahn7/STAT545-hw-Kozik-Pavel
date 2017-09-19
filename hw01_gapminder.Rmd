@@ -4,7 +4,6 @@ output: github_document
 ---
 
 &nbsp;
-
 In this assignment I will look at the  [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are avaliable,
 
 ```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.align="center"}
