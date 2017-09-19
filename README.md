@@ -33,5 +33,5 @@ I did however spend some time learning and reviewing [**ggplot**](https://cran.r
  and various summary statistics it can graph.
 
 
-One issue I had was learning to center items. For instance, centering an image is different than centering a figure embedded within R code. Centering an image requires using the < center > command whereas centering a figure embedded in R required using fig.align="center". Similarly sometimes text was too distant from images.
+One issue I had was learning to center items. For instance, centering an image is different than centering a figure embedded within R code. Centering an image requires using the < center > command whereas centering a figure embedded in R required using fig.align="center". Sometimes something would appear one way when using knitr in R but differently once uploaded to github as well e.g. text alignment
 
