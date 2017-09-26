@@ -18,7 +18,7 @@ typeof(gapminder)
 
     ## [1] "list"
 
-A list.
+A list..
 
 *2. What's its class?*
 
