@@ -185,7 +185,7 @@ fig1 + stat_summary(fun.y = mean, geom = "bar", width = .5) + #allows us to take
 
 ![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
 
-Before moving on let's ask what across continents seems to the the most frequent life expectency. This can be accomplished through the *hist* function.
+Before moving on let's ask what across continents seems to the the most frequent life expectancy. This can be accomplished through the *hist* function.
 
 ``` r
 hist(gapminder2007$lifeExp)
@@ -193,7 +193,7 @@ hist(gapminder2007$lifeExp)
 
 ![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-16-1.png)
 
-70 and above seem to be the most frequently reported life expectancies. Likely many of the values below this associate with countries in Africa given its lower mean life expectancy found earlier.
+70 and above seem to be the most frequently reported life expediencies. Likely many of the values below this associate with countries in Africa given its lower mean life expectancy found earlier.
 
 Next we can consider our other quantitative variable ***population***. We will be a bit more nuanced this time by organizing our output in ascending mean population size. To do this we will adopt the *arrange* function.
 
@@ -218,7 +218,7 @@ Asia very clearly is the most populated continent. The mean population of Asia i
 Let us create a figure to visually depict this magnitude of difference between Asia and other continents. Like our output above we can have population size appear in ascending order by using the *reorder* function.
 
 ``` r
-options(scipen=10000) #This lets use exact values for our y-axis (as opposed to e.g. 8e+07)
+options(scipen=10000) #This lets use exact values for our y-axis (as opposed to scientific notation)
 fig2 <- ggplot(gapminder2007, aes(x = reorder(continent, pop), y = pop)) #x = variable of interest sorted by another varible
 fig2 + stat_summary(fun.y = mean, geom = "bar", width = .5) +
   xlab("Continent") +
