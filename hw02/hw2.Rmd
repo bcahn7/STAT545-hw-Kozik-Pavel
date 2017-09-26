@@ -1,0 +1,278 @@
+---
+title: "Homework Two"
+output: github_document
+---
+####Begin by loading the relevant libraries
+```{r,echo = TRUE, message=F, warning=F}
+library(gapminder)
+library(tidyverse)
+```
+
+####Smell Test Questions
+*1. Is it a data.frame, a matrix, a vector, a list?*
+
+```{r}
+typeof(gapminder)
+```
+
+A list.
+
+*2. What's its class?*
+
+```{r}
+class(gapminder)
+```
+
+A  data frame (and more specifically a tibble data frame).
+
+
+*3. How many variables/columns?*
+
+```{r}
+ncol(gapminder)
+```
+
+There are are 6 variables/columns
+
+*4. How many rows/observations?*
+
+```{r}
+nrow(gapminder)
+```
+
+There are 1704 rows/observations
+
+*5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?*
+
+One simple way to quickly measure the number of rows and columns an object has is through the *dim* function.  
+
+```{r}
+dim(gapminder)
+```
+
+This output tells us the number of rows (1704) by columns (6) and is is useful if we need both pieces of information concurrently.
+
+Another simple alternative is to use the *str* function.
+
+```{r}
+str(gapminder)
+```
+
+The output here tells us a great deal about the data frame, but if we look to the top right it reads *1704 obs. of  6 variables*. 
+
+A slightly different approach is identifying the number of unique observations for a specific variable of interest. This can be done through the *n_distinct* function.
+
+```{r}
+n_distinct(gapminder$pop)
+```
+
+*6. What data type is each variable?*
+
+To answer this question we can use the *str* function.
+
+```{r}
+str(gapminder)
+```
+
+#####Doing so find:
+- country: Factor (with 142 levels) 
+- continent: Factor (with 5 levels)
+- year: Integer
+- lifeExp: Numeric
+- pop: Integer
+- gdpPercap: Numeric
+
+Alternatively if one is only interested in a specific variable the output can be made a little more precise and less cluttered by using the class function.
+
+```{r}
+class(gapminder$gdpPercap)
+```
+
+
+#### Exploring Data Variables
+
+*1. Pick at least one categorical variable and at least one quantitative variable to explore.*
+
+We will pick ***continent*** as our categorical variable and for our quantitative variables ***lifeExp*** and ***population***.
+
+For the purpose of our own investigation we will focus on the most recent statistics available in the gapminder data set, that is, data collected in 2007. 
+
+We can in turn simplify the data set to contain only 2007 statistics by using the *filter* function. One small note, if you forgot what the most recent year of data collection was, the *max* function is handy here. 
+
+
+```{r}
+gapminder2007 <- gapminder %>%
+          filter(year == max(gapminder$year))
+```
+
+
+*2. What are possible values (or range, whichever is appropriate) of each variable?*
+
+Let's consider our qualitative variable first. Using the *str* function we previously found that ***continent*** is a factor with five levels.  
+
+```{r}
+str(gapminder2007$continent)
+```
+
+What are these five levels? To identify them we can use the *levels* function.
+
+```{r}
+levels(gapminder2007$continent)
+```
+
+By doing so, we find that ***continent*** is composed of *Africa*, *Americas*, *Asia*, *Europe* and *Oceania*.
+
+Next Lets look at our quantitative variables  ***lifeExp*** and ***pop***. Let's focus on life expectancy first and calculate what the mean expectancy is for each continent. We can do this through the *piping*, *group_by* and *summarize* functions.  
+
+
+```{r}
+gapminder2007 %>%
+    group_by(continent) %>% 
+    summarize(meanLife=mean(lifeExp))
+```
+
+We find that Oceania has the highest life expectancy at 81 years and Africa has the lowest with 55 years. The other continents fall within this range, although interestingly none of them have a life expectancy within the 60s. Through *ggplot2* we can and visually capture this dispersion. 
+
+```{r}
+library(ggplot2)
+fig1 <- ggplot(gapminder2007, aes(x = continent, y = lifeExp))
+fig1 + stat_summary(fun.y = mean, geom = "bar", width = .5) + #allows us to take the mean population value and represent it with a bar, width controls bar size
+  xlab("Continent") + #renames our X axis
+  ylab("Life Expectancy") + #renames our y axis
+  coord_cartesian(ylim = c(0, 90)) + #speficies our range of values
+  scale_y_continuous( expand= c(0,0), breaks=seq(0,90,10)) #allows us to control y axis increments
+```
+
+Next we can consider our other quantitative variable ***population***. We will be a bit more nuanced this time by organizing our output in ascending mean population size. To do this we will  adopt the *arrange* function.
+
+```{r}
+gapminder2007 %>%
+    group_by(continent) %>% 
+    summarize(meanPop=mean(pop)) %>%
+    arrange((meanPop))
+```
+
+Asia very clearly is the most populated continent. The mean population of Asia is over 50,000,000 more than the next most populated continent America. The least populated continent is Oceania. 
+
+Let us create a figure to visually depict this magnitude of difference between Asia and other continents. Like our output above we can have population size appear in ascending order by using the  *reorder* function.  
+
+```{r}
+options(scipen=10000)
+fig2 <- ggplot(gapminder2007, aes(x = reorder(continent, pop), y = pop)) #x = variable of interest sorted by another varible
+fig2 + stat_summary(fun.y = mean, geom = "bar", width = .5) +
+  xlab("Continent") +
+  ylab("Population") +
+  coord_cartesian(ylim = c(0, 120000000)) +
+  scale_y_continuous( expand= c(0,0), breaks=seq(0,120000000,10000000))
+```
+
+Seeing such a stark difference inspires one to dig deeper. In what country resides the majority of the Asia? To find this we may *filter* to only include Asia, and then select from this different countries and their populations with the *select* function. Lastly to find the most populated country we can *arrange* the data in descending order of population size. Because we are only interested in the most populated cities we will limit our output to the top 3 countries through the *head* function.       
+
+```{r}
+gapminder2007 %>% 
+  filter(continent == "Asia") %>% 
+  select(country, pop) %>%
+  arrange(desc(pop)) %>% #by default arrange uses ascending order unless specified
+  head(3)
+```
+
+In 2007 the most populated countries in Asia were China, India and Indonesia. Just how much more populated were these countries? A figure here can help put this into perspective. To differentiate this figure from previous ones looking at continents we will use a scatter plot. We can do this with the the *geom_point* function. 
+
+```{r}
+gapminder2007 %>% 
+  filter(continent == "Asia") %>% 
+  ggplot(aes(x=reorder(country, pop), y=pop)) + 
+         geom_point(colour = "blue", size = 2) + #we can control the size and color of our data points
+          xlab("Continent") +
+          ylab("Country") +
+          theme(axis.text.x=element_text(angle=45,hjust=1)) + #this lets us tilt and move our y axis labels, otherwise they overlap and clutter
+          coord_cartesian(ylim = c(0,1500000000)) +
+          scale_y_continuous( expand= c(0,0), breaks=seq(0,1500000000,150000000))
+```
+
+Seeing the figure very clearly shows that China and India are massively more populated than any other country in Asia. Indonesia on the other hand while being the third most populated, seems more comparable to other countries than either China or India.
+
+
+Before advancing on I now wish to conduct an analysis of more personal interest. How has the life expectancy of Russia and Canada differed through the years? Because we are now going to look at numerous study years we will use the original gapminder (and not gapminder2007) data set.
+
+First, let us ensure that both countries are recorded within the data set. We can test for this using the *unique* function. 
+
+
+```{r}
+unique(gapminder$country)
+```
+
+While Canada is quickly spotted, Russia seems absent. Perhaps though, we simply missed seeing it. We can more thoroughly determine whether Russia is in the data set by assigning a value of *TRUE* to any country titled "Russia". We can then use the *any* function will discern whether at least one value is true. 
+
+
+```{r}
+Is_Russia_Here <- gapminder$country == "Russia"
+any(Is_Russia_Here)
+```
+
+Russia, at least spelt as "Russia" is not in the current data set. Instead, let us consider a few different but at least neighboring countries in Finland and Mongolia. Let us check if either can be found in the data set.
+
+```{r}
+Is_Finland_Here <- gapminder$country == "Finland"
+any(Is_Finland_Here)
+
+Is_Mongolia_Here <- gapminder$country == "Mongolia" 
+any(Is_Mongolia_Here)
+```
+
+Both Finland and Mongolia are recorded and with that let us compare their life expectancy to Canada. This time we will explore shape and color within the *aes* function. Using the *cord_cartesian* and  *scale_y_continuous* functions we will also specify what years we want the y axis to begin and end. 
+
+```{r}
+gapminder %>% 
+  filter(country == "Canada" | country == "Finland" | country == "Mongolia") %>%
+         ggplot(aes(x=year, y=lifeExp, shape = country, color = country)) + #Here we change shape and color
+         stat_summary(fun.y = mean, geom = "line", size = 1.25) +
+         geom_point(size = 3) +
+          xlab("Year") +
+          ylab("Life Expectancy") +
+          coord_cartesian(ylim = c(30,90), xlim = c(1952,2007)) + #Study start and end time
+          scale_y_continuous( expand= c(0,0), breaks=seq(30,90,5)) + 
+          scale_x_continuous(breaks=seq(1952,2007,5)) + #Increments of 5 years
+         theme(axis.text.x=element_text(angle=45,hjust=1)) 
+```
+
+Viewing this figure reveals that while all countries have shown life expectancy increases over time,  Mongolia overall has a starkly lower life expectancy than either Canada or Finland. Canada and Finland alternatively seem highly comparable, with Canada pushing slightly ahead.  
+         
+
+#### But I want to do more!
+
+
+*Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?*
+
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+
+This code only partially collected the data the researcher was after. One hint of this can be found by looking at the years of data collection for each country. The gapminder data set consists of data collected every five years, starting in 1952 and ending in 2007. However, looking at output where is Afghanistan for the year 1952? Or Rwanda for the year 1957?
+
+A pattern quickly becomes evident, data is being delivered in increments of decades for each country. That is, we have Afghanistan data for 1957, 1967, 1977, 1987, 1997 and 2007. For Rwanda we have data from 1952, 1962, 1972, 1982, 1992, and 2002. 
+
+*Extra: One other way of double-checking is to consider that because each country was samplied 12 times, we should have a total of 24 observations (12 for Rwanda and 12 for Afghanistan). However when we use the dim function, instead of obtaining 24 rows, we instead have only 12.*
+
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan")) %>%
+dim()
+```
+
+How can we correct for this mistake? Lets try re-running this code using the *|* operator which specifies that either *a* or *b* is true. 
+
+```{r}
+RA <-filter(gapminder, country == "Rwanda" | country == "Afghanistan") 
+dim(RA)
+RA
+```
+
+The dimensions appear correct, 24 observations (12 per country) for 6 variables and the output at least on first glance seems to contain the desired information. Lets create a table with this output and examine if we have everything we want. To do so we will use *knitr::kable()*
+
+```{r}
+filter(gapminder, country == "Rwanda" | country == "Afghanistan") %>%
+knitr::kable(digits = 2, col.names=c("Country","Continent","Year","Life Expectancy","Population","GDP per Capita")) #Let's also round to 2 decimals places and rename our variables so they look nice.
+```
+
+
+The researcher now has all the desired relevant information.
