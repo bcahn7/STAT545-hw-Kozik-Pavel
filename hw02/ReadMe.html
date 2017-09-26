@@ -121,17 +121,14 @@ $(document).ready(function () {
 
 <div id="homework-2-stat-545" class="section level2">
 <h2>Homework 2 STAT 545</h2>
-</div>
-<div id="this-folder-contains-the-second-homework-submission-for-stats-545." class="section level2">
-<h2>This folder contains the second homework submission for stats 545.</h2>
-<p>-Here is a link to the analysis in which gapminder data was explored using dplyer, ggplot and other functions</p>
+<p>Here is a <a href="https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md">link to the analysis</a> in which gapminder data was explored using dplyer, ggplot and other functions. If there is an interest, here is the associated <a href="https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.Rmd">rmd file</a>.</p>
 <div id="progress-report" class="section level3">
 <h3>Progress Report</h3>
 <p><em>Reflect on what was hard/easy, problems you solved, helpful tutorials you read, etc. What things were hard, even though you saw them in class? What was easy(-ish) even though we haven’t done it in class?</em></p>
-<p>One difficult aspect of documenting what was hard/easy is that as soon as an issue or error is found, I begin looking for a solution or reference. I then apply remedies, often in multiple unsuccessful attempts, to resolve the issue and by the end of the process may have gone through various functions and different stratagies. This makes it difficult to identify which tutorial was precisfly helpful as often different resources provided different pieces of a solution.</p>
-<div id="some-of-the-more-commonly-used-resources-however-were" class="section level6">
-<h6>Some of the more commonly used resources however were</h6>
-</div>
+<p>One difficult aspect of documenting what was hard/easy is that as soon as an issue or error is found, I begin looking for a solution or reference. I then apply remedies, often in multiple unsuccessful attempts, to resolve the issue and by the end of the process may have gone through various functions and different strategies. This makes it difficult to identify which tutorial was precisely helpful as often different resources provided different pieces of a solution.</p>
+<p>There were however a few resources that were more commonly used than others, this included the course webpage on <a href="http://stat545.com/block006_care-feeding-data.html">basic data care</a>, both of Jenny’s tutorials on dplyer <a href="http://stat545.com/block009_dplyr-intro.html">1</a> <a href="http://stat545.com/block010_dplyr-end-single-table.html">2</a>, the <a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf">reference manual</a> for ggplot and a relevant <a href="http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html">tutorial</a>, and documentation on how to use <a href="https://www.rdocumentation.org/packages/knitr/versions/1.17/topics/kable">kable</a>.</p>
+<p>One problem that I had for instance was re-naming columns when creating a table with kable. By looking through kable documentation I was able to find option to rename via <em>col.names</em>. Another problem I had was identifying whether or not Russia was in the gapminder data set. Are looking through an alphabetized list of countries and not finding Russia, I thought it would be insufficient to state that I simply did not see the country listed and instead wanted to provide a more compelling rational. This lead me to use create a variable as follows, <em>gapminder$country == “Russia”</em>, and to eventually find the webpage documenting the function <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/any">any</a>. Lastly, even though we had covered ggplot in class, practise seems key to becoming well-versed in its utility.</p>
+<p>In terms of what was easy, there felt like a good deal of intuition or a sentiment of, I do not know exactly how to do the desired operation, but I roughly know how to get there eventually. Because of this a solution always seemed tenable, just at times elusive.</p>
 </div>
 </div>
 

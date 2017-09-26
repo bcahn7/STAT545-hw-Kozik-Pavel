@@ -1,1 +1,15 @@
 ## Homework 2 STAT 545
+
+Here is a [link to the analysis](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.md)  in which gapminder data was explored using dplyer, ggplot and other functions. If there is an interest, here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw02/hw2.Rmd).
+
+### Progress Report
+
+*Reflect on what was hard/easy, problems you solved, helpful tutorials you read, etc. What things were hard, even though you saw them in class? What was easy(-ish) even though we haven’t done it in class?*
+
+One difficult aspect of documenting what was hard/easy is that as soon as an issue or error is found, I begin looking for a solution or reference. I then apply remedies, often in multiple unsuccessful attempts, to resolve the issue and by the end of the process may have gone through various functions and different strategies. This makes it difficult to identify which tutorial was precisely helpful as often different resources provided different pieces of a solution.
+
+There were however a few resources that were more commonly used than others, this included the course webpage on [basic data care](http://stat545.com/block006_care-feeding-data.html), both of Jenny's tutorials on dplyer [1](http://stat545.com/block009_dplyr-intro.html) [2](http://stat545.com/block010_dplyr-end-single-table.html), the [reference manual](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf) for ggplot and a relevant [tutorial](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html), and documentation on how to use [kable](https://www.rdocumentation.org/packages/knitr/versions/1.17/topics/kable).
+
+One problem that I had for instance was re-naming columns when creating a table with kable. By looking through kable documentation I was able to find option to rename via *col.names*. Another problem I had was identifying whether or not Russia was in the gapminder data set. Are looking through an alphabetized list of countries and not finding Russia, I thought it would be insufficient to state that I simply did not see the country listed and instead wanted to provide a more compelling rational. This lead me to use create a variable as follows, *gapminder$country == "Russia"*, and to eventually find the webpage documenting the function [any](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/any). Lastly, even though we had covered ggplot in class, practise seems key to becoming well-versed in its utility.
+
+In terms of what was easy, there felt like a good deal of intuition or a sentiment of, I do not know exactly how to do the desired operation, but I roughly know how to get there eventually. Because of this a solution always seemed tenable, just at times elusive. 

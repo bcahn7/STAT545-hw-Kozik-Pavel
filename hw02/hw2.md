@@ -185,6 +185,16 @@ fig1 + stat_summary(fun.y = mean, geom = "bar", width = .5) + #allows us to take
 
 ![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
 
+Before moving on let's ask what across continents seems to the the most frequent life expectency. This can be accomplished through the *hist* function.
+
+``` r
+hist(gapminder2007$lifeExp)
+```
+
+![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-16-1.png)
+
+70 and above seem to be the most frequently reported life expectancies. Likely many of the values below this associate with countries in Africa given its lower mean life expectancy found earlier.
+
 Next we can consider our other quantitative variable ***population***. We will be a bit more nuanced this time by organizing our output in ascending mean population size. To do this we will adopt the *arrange* function.
 
 ``` r
@@ -208,7 +218,7 @@ Asia very clearly is the most populated continent. The mean population of Asia i
 Let us create a figure to visually depict this magnitude of difference between Asia and other continents. Like our output above we can have population size appear in ascending order by using the *reorder* function.
 
 ``` r
-options(scipen=10000)
+options(scipen=10000) #This lets use exact values for our y-axis (as opposed to e.g. 8e+07)
 fig2 <- ggplot(gapminder2007, aes(x = reorder(continent, pop), y = pop)) #x = variable of interest sorted by another varible
 fig2 + stat_summary(fun.y = mean, geom = "bar", width = .5) +
   xlab("Continent") +
@@ -217,7 +227,7 @@ fig2 + stat_summary(fun.y = mean, geom = "bar", width = .5) +
   scale_y_continuous( expand= c(0,0), breaks=seq(0,120000000,10000000))
 ```
 
-![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-17-1.png)
+![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-18-1.png)
 
 Seeing such a stark difference inspires one to dig deeper. In what country resides the majority of the Asia? To find this we may *filter* to only include Asia, and then select from this different countries and their populations with the *select* function. Lastly to find the most populated country we can *arrange* the data in descending order of population size. Because we are only interested in the most populated cities we will limit our output to the top 3 countries through the *head* function.
 
@@ -250,7 +260,7 @@ gapminder2007 %>%
           scale_y_continuous( expand= c(0,0), breaks=seq(0,1500000000,150000000))
 ```
 
-![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-19-1.png)
+![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-20-1.png)
 
 Seeing the figure very clearly shows that China and India are massively more populated than any other country in Asia. Indonesia on the other hand while being the third most populated, seems more comparable to other countries than either China or India.
 
@@ -376,7 +386,7 @@ gapminder %>%
          theme(axis.text.x=element_text(angle=45,hjust=1)) 
 ```
 
-![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-23-1.png)
+![](hw2_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-24-1.png)
 
 Viewing this figure reveals that while all countries have shown life expectancy increases over time, Mongolia overall has a starkly lower life expectancy than either Canada or Finland. Canada and Finland alternatively seem highly comparable, with Canada pushing slightly ahead.
 
