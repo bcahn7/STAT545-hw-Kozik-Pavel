@@ -6,7 +6,7 @@ output: github_document
 &nbsp;
 In this assignment I will look at the  [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are available,
 
-```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.align="center"}
+```{r, message=FALSE, warning=FALSE, echo = TRUE, fig.align="center"}
 library(gapminder)
 library(ggplot2)
 names(gapminder)

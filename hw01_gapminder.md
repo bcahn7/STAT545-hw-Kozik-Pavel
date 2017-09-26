@@ -3,6 +3,12 @@ Homework 1: Gapminder
 
   In this assignment I will look at the [**gapminder**](https://cran.r-project.org/web/packages/gapminder/index.html) data set, let us begin by seeing what variables are available,
 
+``` r
+library(gapminder)
+library(ggplot2)
+names(gapminder)
+```
+
     ## [1] "country"   "continent" "year"      "lifeExp"   "pop"       "gdpPercap"
 
 and their respective formats.
