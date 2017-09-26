@@ -15,7 +15,7 @@ library(tidyverse)
 typeof(gapminder)
 ```
 
-A list..
+A list.
 
 *2. What's its class?*
 
