@@ -135,9 +135,8 @@ geom_point(aes(y = Trim10), color = "red")+
 geom_smooth(aes(y=Trim10), se = "FALSE", method = 'loess', color = "red")+
 geom_point(aes(y = Trim50), color = "green")+
 geom_smooth(aes(y=Trim50), se = "FALSE", method = 'loess', color = "green") +
-coord_cartesian(ylim = c(40,80), xlim = c(1952,2011)) + #Study start and end time
 scale_y_continuous(expand= c(0,0), breaks=seq(40,80,10), lim = c(40,80)) +
-scale_x_continuous(expand= c(0,0), breaks=seq(1952,2011,5), lim = c(1952,2011)) +  #Set range and axis increments to be every 5 years to match empirical data 
+scale_x_continuous(expand= c(0,0), breaks=seq(1952,2011,5), lim = c(1952,2012.5)) +  #Set range and axis increments to be every 5 years to match empirical data 
 xlab("Year") +
 ylab("Life Expectency") +
   
@@ -274,7 +273,7 @@ group_by(continent, year) %>%
   xlab("Year") +
   ylab("Life Expectancy")+
   geom_vline(xintercept = 2007, color = "grey", linetype = "longdash", size = 1) +
-  annotate("text", x = 2021, y = 89, size = 3.5, color = "black", label = "Predicted Life Expectency") +
+  annotate("text", x = 2022, y = 89, size = 3.5, color = "black", label = "Predicted Life Expectency") +
   theme(axis.text.x=element_text(angle=45,hjust=1)) +
   scale_colour_discrete(name = "Continent") +    
   aesthetictheme 
