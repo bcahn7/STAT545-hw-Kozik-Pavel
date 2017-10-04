@@ -94,7 +94,7 @@ On top of each line are three circles, as also shown in the top right legend of 
   coord_cartesian(ylim = c(0,120000)) +
   scale_y_continuous(expand= c(0,0), breaks=seq(0,120000,10000), lim = c(0,120000)) +  
   xlab("Continent") +
-  ylab("Mean GDP") +
+  ylab("GDP") +
   
 #Creating the legend  
   annotate(geom = "point", x = 4.7, y = 100000, size = 5, color = "black") +
@@ -158,6 +158,8 @@ gapminder %>%
 ggplot(aes(y = lifeExp, x = year, group = continent, colour = continent)) +
 geom_jitter(alpha = .20)+
 geom_point(alpha = .20)+
+xlab("Year") +
+ylab("Life Expectency") +
 aesthetictheme
 ```
 
