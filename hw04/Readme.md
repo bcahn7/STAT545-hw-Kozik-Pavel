@@ -1,6 +1,6 @@
 ### Homework 4 STAT 545
 
-Here is a [link to homework 4]() in which gapminder data was explored largely through plots and dpyler. If there is an interest, here is the associated [rmd file]() as well.
+Here is a [link to homework 4](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw04/hw4.md) in which gapminder data was explored largely through plots and dpyler. If there is an interest, here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw04/hw4.Rmd) as well.
 
 The three databases this homework relied on were provided by [gapminder](https://cran.r-project.org/web/packages/gapminder/index.html), the [World Health Organization (WHO)](http://www.who.int/en/) and the [United Nations Office on Drugs and Crime](http://www.unodc.org/).
 
