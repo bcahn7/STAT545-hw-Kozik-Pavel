@@ -119,10 +119,19 @@ $(document).ready(function () {
 </div>
 
 
-<div id="homework-3-stat-545" class="section level2">
-<h2>Homework 3 STAT 545</h2>
+<div id="homework-4-stat-545" class="section level3">
+<h3>Homework 4 STAT 545</h3>
 <p>Here is a <a href>link to homework 4</a> in which gapminder data was explored largely through plots and dpyler. If there is an interest, here is the associated <a href>rmd file</a> as well.</p>
 <p>The three databases this homework relied on were provided by <a href="https://cran.r-project.org/web/packages/gapminder/index.html">gapminder</a>, the <a href="http://www.who.int/en/">World Health Organization (WHO)</a> and the <a href="http://www.unodc.org/">United Nations Office on Drugs and Crime</a>.</p>
+</div>
+<div id="progpress-report" class="section level3">
+<h3>Progpress Report</h3>
+<p>One issue to resolve concerned renaming variables. For instance, when renaming “Korea, Dem. Rep.” from the gapminder data set into “NorthKorea”, the line of code that worked was:</p>
+<p><em>levels(gapminder<span class="math inline">\(country)[match(&quot;Korea, Dem. Rep.&quot;,levels(gapminder\)</span>country))] &lt;- “NorthKorea”</em></p>
+<p>However, this is a bit of a cumbersome line and while workable for a few instances, does not seem realistic if a great deal of renaming must be done.</p>
+<p>Another complication encountered was, I had wanted to use the assignment to better learn kable tables, and in particular, how to make them more aesthetically pleasing. However, when using <em>format = “markdown”</em> within the function, aesthetic options seem limited. Much of the online resources showing more pleasing tables instead rely on <em>format = html</em> or <em>format = latex</em>. <a href="https://github.com/haozhu233/kableExtra">Here is an example of how kable tables using this these can look.</a>. Although I did attempt these, I reverted to markdown to continue and finish the assignment as this was a tangible interest rather than seemingly core for assignment completion.</p>
+<p>One last comment worth making was the amount of data preparation required for the two different data sets I used. Data provided by the world health organization required considerably less pruning before merging with gapminder whereas data provided by the United Nations Office on Drugs and Crime required considerably more time. As a result, I learned numerous functions not taught in the class but that were useful, such as for instance when identifying duplicate variable titles:</p>
+<p><em>which(colnames(HomicideData)==“2003” )</em></p>
 </div>
 
 
