@@ -1,9 +1,9 @@
-hw4
+Homework 4
 ================
 
 ### Load relevant libraries
 
-### General data reshaping and relationship to aggregation
+### Task 1: General data reshaping and relationship to aggregation
 
 *Activity \#2*
 
@@ -168,7 +168,7 @@ a_theme
 
 There are various points emerging from this figure. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean Famine, and after, the divide between the two countries further grew and exasperated.
 
-### Join, merge, look up
+### Task 2: Join, merge, look up
 
 *Activity \#1*
 
@@ -178,7 +178,7 @@ There are various points emerging from this figure. One broad note is that North
 
 *- One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.*
 
-To address this question having a specific focus is important. I will first simplify my data set to include only data collected during the final year of data collection, 2007. Then I will identify data sets that to collected during this year to allow a comparison of different countries during the same year.
+To address this question having a specific focus is important. I will first simplify my data set to include only data collected during the final year of gapminder data collection, 2007. Then I will identify data sets that to collected during this year to allow a comparison of different countries during the same year.
 
 ``` r
 #Simplify gapminder to only have data from 2007
@@ -283,7 +283,7 @@ names(PD)
     ## [30] "Nursing and midwifery personnel density (per 1000 population) (numeric)"         
     ## [31] "Nursing and midwifery personnel density (per 1000 population) (comment)"
 
-For brevity and simplicity, we will rename our variables of interest.
+The result is a bit messy. To alleviate this, and for brevity and simplicity, we will rename our variables of interest.
 
 ``` r
 names(PD)[names(PD) == "Year (string)"] <- "Year"
@@ -342,7 +342,7 @@ PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000)
 PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
 ```
 
-Both data frames now are ready to be joined. We can do so with the left\_join function.
+Both data frames now are ready to be joined. We can do so with the *left\_join* function.
 
 ``` r
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -949,13 +949,13 @@ HomicideHealthMinder %>%
 
 The resulting scatter plot does not seem to make visible any immediate or obvious association. The relationship then between these two variables is likely much more nuanced and would require further inquiry.
 
-###### Task 3
+### Task 3: Join, merge and match
 
 *Activity \#3*
 
 *This is really an optional add-on to either of the previous activities.* *Explore the base function merge(), which also does joins. Compare and contrast with dplyr joins.* *Explore the base function match(), which is related to joins and merges, but is really more of a “table lookup”. Compare and contrast with a true join/merge.*
 
-Let us go back and join two data sets using the left\_join function
+Let us go back and join two data sets using the *left\_join* function
 
 ``` r
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -987,29 +987,31 @@ This results in a much smaller data frame with 49 observations for 11 columns.
 
 Why do these two functions differ?
 
-To answer this we can look up the functions i.e. ?left\_join and ?merge
+To answer this we can look up the functions i.e. *?left\_join* and *?merge*
 
 Or alternatively we can try and see if a visual difference can be found
 
 ``` r
-head(HealthMinder)
+head(as.data.frame(HealthMinder))
 ```
 
-    ## # A tibble: 6 x 11
-    ##       country continent  year lifeExp      pop  gdpPercap  Year
-    ##         <chr>    <fctr> <int>   <dbl>    <int>      <dbl> <chr>
-    ## 1 Afghanistan      Asia  2007  43.828 31889923   974.5803  2007
-    ## 2     Albania    Europe  2007  76.423  3600523  5937.0295  <NA>
-    ## 3     Algeria    Africa  2007  72.301 33333216  6223.3675  2007
-    ## 4      Angola    Africa  2007  42.731 12420476  4797.2313  <NA>
-    ## 5   Argentina  Americas  2007  75.320 40301927 12779.3796  <NA>
-    ## 6   Australia   Oceania  2007  81.235 20434176 34435.3674  <NA>
-    ## # ... with 4 more variables: PhysiciansPer1000 <chr>,
-    ## #   DentistPer1000 <chr>, NumPhysiciansPer1000 <dbl>,
-    ## #   NumDentistPer1000 <dbl>
+    ##       country continent year lifeExp      pop  gdpPercap Year
+    ## 1 Afghanistan      Asia 2007  43.828 31889923   974.5803 2007
+    ## 2     Albania    Europe 2007  76.423  3600523  5937.0295 <NA>
+    ## 3     Algeria    Africa 2007  72.301 33333216  6223.3675 2007
+    ## 4      Angola    Africa 2007  42.731 12420476  4797.2313 <NA>
+    ## 5   Argentina  Americas 2007  75.320 40301927 12779.3796 <NA>
+    ## 6   Australia   Oceania 2007  81.235 20434176 34435.3674 <NA>
+    ##   PhysiciansPer1000 DentistPer1000 NumPhysiciansPer1000 NumDentistPer1000
+    ## 1             0.183          0.012                0.183             0.012
+    ## 2              <NA>           <NA>                   NA                NA
+    ## 3             1.192          0.321                1.192             0.321
+    ## 4              <NA>           <NA>                   NA                NA
+    ## 5              <NA>           <NA>                   NA                NA
+    ## 6              <NA>           <NA>                   NA                NA
 
 ``` r
-head(Merge_HealthMinder)
+head(as.data.frame(Merge_HealthMinder))
 ```
 
     ##       country continent year lifeExp       pop  gdpPercap Year
@@ -1027,7 +1029,11 @@ head(Merge_HealthMinder)
     ## 5              <NA>          0.732                   NA             0.732
     ## 6             1.707           1.14                1.707             1.140
 
-Quickly evident is that Angola and Albania appear via left\_join but not merge. We can also note that when Angola and Albania do appear, they do not contain values for both data sets, that is, they both have NA values for year, PhysiciansPer1000 and DentistPer1000. The merge function as such produces us a data set only for which data entries on our matching variable are filled by both data sets. R documentation supports this as written for the merge package. *The rows in the two data frames that match on the specified columns are extracted, and joined together.*
+Quickly evident is that Angola and Albania appear within the data set created through *left\_join* but not *merge*.
+
+The merge function as such produces us a data set for which entries in the matching variable are in both data sets. In our case, both countries have to be listed, to be produced in the final data frame. R documentation writes similarly when reading about the merge function, *"The rows in the two data frames that match on the specified columns are extracted, and joined together."*
+
+Next the *match* function.
 
 ``` r
 Match_HealthMinder <- match(gapminder2007, PD2007)
@@ -1055,7 +1061,7 @@ length(Match_HealthMinder)
 
     ## [1] 142
 
-The result is 142 instances of the value 1. This would seem to suggest every instance of *gapminder2007*y**e**a**r* \* *m**a**t**c**h**e**s**e**v**e**r**y**i**n**s**t**a**n**c**e**o**f* \* *P**D*2007Year*, and this is indeed true because *2007* is the only value each variable holds.
+The result is 142 instances of the value 1. This would seem to suggest every instance of *gapminder2007* matches every instance of *PD2007* for year, and this is indeed true because *2007* is the only value each variable holds.
 
 ``` r
 unique(gapminder2007$year)
@@ -1069,13 +1075,22 @@ unique(PD2007$Year)
 
     ## [1] "2007"
 
-Match then, is telling us which values in the two data frames *match*. We can then for instance use match to index the location of matching countries within the two data sets.
+Match then is telling us which values in the two data frames *match* or that is, are identical. We can then for instance use match to index the location of matching countries within the two data sets.
 
 ``` r
 Match_HealthMinder <- match(gapminder2007$country, PD2007$country)
+Match_HealthMinder
 ```
 
-Deciphering this, the first country of *gapminder2007*c**o**u**n**t**r**y* \* *s**h**o**u**l**d**m**a**t**c**h**t**h**e*47*t**h**c**o**u**n**t**r**y**i**n* \* *P**D*2007country*
+    ##   [1] 47 NA  1 NA NA NA NA 48 27 35 NA NA NA NA 17 NA NA NA NA  2 18 NA NA
+    ##  [24] 19 61 20 NA NA NA NA NA NA 21 NA NA NA NA NA 49 NA NA NA  5 NA 37 NA
+    ##  [47]  6 NA  7 NA 22 NA NA NA NA NA 38 39 29 NA NA NA NA NA NA NA NA 50 NA
+    ##  [70] NA NA 51 52 NA NA NA  8 NA 62  9 NA NA NA NA NA 53 NA 31 10 NA NA 64
+    ##  [93] 23 NA 11 NA 54 55 24 NA NA NA NA 41 NA NA NA NA NA NA NA NA NA 67 NA
+    ## [116] NA NA 13 43 32 56 NA 44 NA NA NA NA 33 14 26 58 46 NA NA NA NA NA NA
+    ## [139] NA NA NA 15
+
+Deciphering this, the first country of *gapminder2007* should match the 47th country in *PD2007*.
 
 ``` r
 as.character(gapminder2007$country)[1]
@@ -1089,7 +1104,7 @@ PD2007$country[47]
 
     ## [1] "Afghanistan"
 
-Another example is, the third country of *gapminder2007*c**o**u**n**t**r**y* \* *s**h**o**u**l**d**m**a**t**c**h**t**h**e**f**i**r**s**t**c**o**u**n**t**r**y**o**f* \* *P**D*2007country*
+Another example is, the third country of *gapminder2007* country should match the first country of *PD2007*.
 
 ``` r
 as.character(gapminder2007$country)[3]

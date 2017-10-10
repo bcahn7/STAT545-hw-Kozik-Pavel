@@ -1,5 +1,5 @@
 ---
-title: "hw4"
+title: "Homework 4"
 output: github_document
 ---
 
@@ -11,7 +11,7 @@ library(knitr)
 library(kableExtra)
 ```
 
-###General data reshaping and relationship to aggregation
+### Task 1: General data reshaping and relationship to aggregation
 
 *Activity #2*
 
@@ -78,7 +78,7 @@ a_theme
 
 There are various points emerging from this figure. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean Famine, and after, the divide between the two countries further grew and exasperated.
 
-###Join, merge, look up
+### Task 2: Join, merge, look up
 
 *Activity #1*
 
@@ -88,7 +88,7 @@ There are various points emerging from this figure. One broad note is that North
 
 *- One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.*
 
-To address this question having a specific focus is important. I will first simplify my data set to include only data collected during the final year of data collection, 2007. Then I will identify data sets that to collected during this year to allow a comparison of different countries during the same year. 
+To address this question having a specific focus is important. I will first simplify my data set to include only data collected during the final year of gapminder data collection, 2007. Then I will identify data sets that to collected during this year to allow a comparison of different countries during the same year. 
 
 ```{r}
 #Simplify gapminder to only have data from 2007
@@ -117,7 +117,7 @@ head(PD)
 names(PD)
 ```
 
-For brevity and simplicity, we will rename our variables of interest.
+The result is a bit messy. To alleviate this, and for brevity and simplicity, we will rename our variables of interest.
 
 ```{r}
 names(PD)[names(PD) == "Year (string)"] <- "Year"
@@ -160,7 +160,7 @@ PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000)
 PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
 ```
 
-Both data frames now are ready to be joined. We can do so with the left_join function. 
+Both data frames now are ready to be joined. We can do so with the *left_join* function. 
 
 ```{r}
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -358,7 +358,7 @@ The resulting scatter plot does not seem to make visible any immediate or obviou
 
 
 
-######Task 3
+###Task 3: Join, merge and match
 
 *Activity #3*
 
@@ -367,7 +367,7 @@ The resulting scatter plot does not seem to make visible any immediate or obviou
 *Explore the base function match(), which is related to joins and merges, but is really more of a “table lookup”. Compare and contrast with a true join/merge.*
 
 
-Let us go back and join two data sets using the left_join function
+Let us go back and join two data sets using the *left_join* function
 
 ```{r}
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -396,11 +396,15 @@ Or alternatively we can try and see if a visual difference can be found
 
 
 ```{r}
-head(HealthMinder)
-head(Merge_HealthMinder)
+head(as.data.frame(HealthMinder))
+head(as.data.frame(Merge_HealthMinder))
 ```
 
-Quickly evident is that Angola and Albania appear via left_join but not merge. We can also note that when Angola and Albania do appear, they do not contain values for both data sets, that is, they both have NA values for year, PhysiciansPer1000 and DentistPer1000. The merge function as such produces us a data set only for which data entries on our matching variable are filled by both data sets. R documentation supports this as written for the merge package. *The rows in the two data frames that match on the specified columns are extracted, and joined together.*
+Quickly evident is that Angola and Albania appear within the data set created through *left_join* but not *merge*. 
+
+The merge function as such produces us a data set for which entries in the matching variable are in both data sets. In our case, both countries have to be listed, to be produced in the final data frame. R documentation writes similarly when reading about the merge function, *"The rows in the two data frames that match on the specified columns are extracted, and joined together."*
+
+Next the *match* function.
 
 ```{r}
 Match_HealthMinder <- match(gapminder2007, PD2007)
@@ -415,29 +419,28 @@ Match_HealthMinder
 length(Match_HealthMinder)
 ```
 
-
-The result is 142 instances of the value 1. This would seem to suggest every instance of *gapminder2007$year* matches every instance of *PD2007$Year*, and this is indeed true because *2007* is the only value each variable holds.
+The result is 142 instances of the value 1. This would seem to suggest every instance of *gapminder2007* matches every instance of *PD2007* for year, and this is indeed true because *2007* is the only value each variable holds.
 
 ```{r}
 unique(gapminder2007$year)
 unique(PD2007$Year)
 ```
 
-
-Match then, is telling us which values in the two data frames *match*. We can then for instance use match to index the location of matching countries within the two data sets.
+Match then is telling us which values in the two data frames *match* or that is, are identical. We can then for instance use match to index the location of matching countries within the two data sets.
 
 ```{r}
 Match_HealthMinder <- match(gapminder2007$country, PD2007$country)
+Match_HealthMinder
 ```
 
-Deciphering this, the first country of *gapminder2007$country* should match the 47th country in *PD2007$country* 
+Deciphering this, the first country of *gapminder2007* should match the 47th country in *PD2007*.
 
 ```{r}
 as.character(gapminder2007$country)[1]
 PD2007$country[47]
 ```
 
-Another example is, the third country of *gapminder2007$country* should match the first country of *PD2007$country*
+Another example is, the third country of *gapminder2007* country should match the first country of *PD2007*.
 
 ```{r}
 as.character(gapminder2007$country)[3]
