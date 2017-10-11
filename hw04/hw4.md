@@ -209,7 +209,7 @@ a_theme
 
 ![](hw4_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-9-1.png)
 
-There are various points emerging from this figure that I believe are easier to spot compared to the original plot we created. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean Famine, and after, the difference between the two countries further grew and exasperated.
+There are various points emerging from this figure that I believe are easier to spot compared to the original plot we created. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean famine, and after, the difference between the two countries further grew and exasperated.
 
 ### Task 2: Join, merge, look up
 
