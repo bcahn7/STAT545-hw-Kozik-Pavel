@@ -169,8 +169,8 @@ a_theme = theme(panel.grid.major = element_blank(),
 #Data plotting  
 N.S.Korea %>%
 ggplot(aes(x = N.lifeExp, y = S.lifeExp))+
-geom_point(aes(color = Year), size = 3) +
-geom_text(aes(label = Year), color = "black", size = 2.5, hjust = -.5)+ #move around text with hjust
+geom_point(aes(color = Year), size = 5) +
+geom_text(aes(label = Year), color = "black", size = 3.5, hjust = -.5)+ #move around text with hjust
 scale_y_continuous(expand= c(0,0), breaks=seq(45,80,5), lim = c(45,80)) + #Set Y axis increments and range
 scale_x_continuous(breaks=seq(45,80,5), lim = c(45,80)) + #Set X axis increments and range
 xlab("North Korean Life Expectancy") + #Title X axis
