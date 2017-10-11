@@ -97,7 +97,7 @@ levels(gapminder$country)[match("Korea, Dem. Rep.",levels(gapminder$country))] <
 levels(gapminder$country)[match("Korea, Rep.",levels(gapminder$country))] <- "SouthKorea"
 ```
 
-Next, we can create our two data sets. First we can create a data set that contains solely North Korea and our variables of interest, year and life expectency.
+Next, we can create our two data sets. First we can create a data set that contains solely North Korea and our variables of interest, year and life expectancy.
 
 ``` r
 N.Korea <- gapminder %>% 
@@ -118,7 +118,7 @@ S.Korea <- gapminder %>%
 names(S.Korea)[names(S.Korea) == "lifeExp"] <- "S.lifeExp"
 ```
 
-For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us committ this join.
+For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this join.
 
 ``` r
 N.S.Korea <- left_join(N.Korea, S.Korea)
@@ -154,7 +154,7 @@ kable(digits = 2, format="markdown",  col.names=c("Year","North Korea L.E.", "So
 |  2002|             66.66|              77.05|
 |  2007|             67.30|              78.62|
 
-\*\*\*L.E. = Life expectency
+\*\*\*L.E. = Life expectancy
 
 The output appears as desired. However, it is a bit difficult to extract from this a meaningful interpretation. A visualization here would be helpful and so let us plot life expectancy over time for these two countries.
 
@@ -181,9 +181,9 @@ a_theme
 
 ![](hw4_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-8-1.png)
 
-From this figure we can see that although life expectency has generally been increasing for both countries, North Korea has had a small dip in more recent years. While this plot contains the information we are interested in, I would rather renconstruct a line figure from the original gapminder data. Since this is a topic we are already persuing and one I am interested in, I will take the opportunity to do this and practise ggplot.
+From this figure we can see that although life expectancy has generally been increasing for both countries, North Korea has had a small dip in more recent years. While this plot contains the information we are interested in, I would rather reconstruct a line figure from the original gapminder data. Since this is a topic we are already pursuing and one I am interested in, I will take the opportunity to do this and practice plotting.
 
-Below is a line graph in which the life expectency of both countries is plotted over time. In addition to this however we can include a key historical event that occurred in North Korea. During the years 1994 to 1998 North Korea experienced an extreme [famine](https://en.wikipedia.org/wiki/North_Korean_famine), we can capture this time period in our graph through the use of dotted vertical lines.
+Below is a line graph in which the life expectancy of both countries is plotted over time. In addition to this however we can include a key historical event that occurred in North Korea. During the years 1994 to 1998 North Korea experienced an extreme [famine](https://en.wikipedia.org/wiki/North_Korean_famine), we can capture this time period in our graph through the use of dotted vertical lines.
 
 ``` r
 #Data preparation  
