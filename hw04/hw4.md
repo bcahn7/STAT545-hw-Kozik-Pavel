@@ -118,10 +118,10 @@ S.Korea <- gapminder %>%
 names(S.Korea)[names(S.Korea) == "lifeExp"] <- "S.lifeExp"
 ```
 
-For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this join.
+For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this with a *right join*.
 
 ``` r
-N.S.Korea <- left_join(N.Korea, S.Korea)
+N.S.Korea <- right_join(S.Korea, N.Korea)
 ```
 
     ## Joining, by = "year"
@@ -141,18 +141,18 @@ kable(digits = 2, format="markdown",  col.names=c("Year","North Korea L.E.", "So
 
 |  Year|  North Korea L.E.|  South Korean L.E.|
 |-----:|-----------------:|------------------:|
-|  1952|             50.06|              47.45|
-|  1957|             54.08|              52.68|
-|  1962|             56.66|              55.29|
-|  1967|             59.94|              57.72|
-|  1972|             63.98|              62.61|
-|  1977|             67.16|              64.77|
-|  1982|             69.10|              67.12|
-|  1987|             70.65|              69.81|
-|  1992|             69.98|              72.24|
-|  1997|             67.73|              74.65|
-|  2002|             66.66|              77.05|
-|  2007|             67.30|              78.62|
+|  1952|             47.45|              50.06|
+|  1957|             52.68|              54.08|
+|  1962|             55.29|              56.66|
+|  1967|             57.72|              59.94|
+|  1972|             62.61|              63.98|
+|  1977|             64.77|              67.16|
+|  1982|             67.12|              69.10|
+|  1987|             69.81|              70.65|
+|  1992|             72.24|              69.98|
+|  1997|             74.65|              67.73|
+|  2002|             77.05|              66.66|
+|  2007|             78.62|              67.30|
 
 \*\*\*L.E. = Life expectancy
 
@@ -385,7 +385,7 @@ PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000)
 PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
 ```
 
-Both data frames now are ready to be joined. We can do so with the *left\_join* function.
+Both data frames now are ready to be joined. This time we will use the *left\_join* function.
 
 ``` r
 HealthMinder <- left_join(gapminder2007, PD2007)

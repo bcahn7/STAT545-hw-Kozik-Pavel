@@ -57,10 +57,10 @@ S.Korea <- gapminder %>%
 names(S.Korea)[names(S.Korea) == "lifeExp"] <- "S.lifeExp"
 ```
 
-For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this join.
+For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this with a *right join*.
 
 ```{r}
-N.S.Korea <- left_join(N.Korea, S.Korea)
+N.S.Korea <- right_join(S.Korea, N.Korea)
 ```
 
 As a side, I would like to rename "year" into "Year"
@@ -212,7 +212,7 @@ PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000)
 PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
 ```
 
-Both data frames now are ready to be joined. We can do so with the *left_join* function. 
+Both data frames now are ready to be joined. This time we will use the *left_join* function. 
 
 ```{r}
 HealthMinder <- left_join(gapminder2007, PD2007)
