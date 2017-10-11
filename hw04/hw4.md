@@ -969,10 +969,10 @@ arrange(desc(HomicidesIn2007))
 
 As the output shows Iraq, Jamaica and El Salvador had the most homicides in 2007.
 
-The data appears ready to merge.
+The data appears ready to merge. We will use *right join* this time.
 
 ``` r
-HomicideHealthMinder <- left_join(HealthMinder, HomicideData2007)
+HomicideHealthMinder <- right_join(HomicideData2007, HealthMinder)
 ```
 
     ## Joining, by = "country"
