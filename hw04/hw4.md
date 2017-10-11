@@ -482,7 +482,7 @@ HealthMinder %>%
 
 ![](hw4_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-23-1.png)
 
-Here to the data data shape contains somewhat of a curve although something of a positive trend can be seen. As dentist density increases as does life expectancy. With the same forewarning as prior, but again for the purpose of practice, we will do a linear test of this trend.
+Here to the data shape contains somewhat of a curve although something of a positive trend can be seen. As dentist density increases as does life expectancy. With the same forewarning as prior, but again for the purpose of practice, we will do a linear test of this trend.
 
 ``` r
 cor.test(x = HealthMinder$NumDentistPer1000, y = HealthMinder$lifeExp)
