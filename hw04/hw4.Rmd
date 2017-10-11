@@ -27,7 +27,6 @@ Let us first identify these countries within our data set
 unique(gapminder$country)
 ```
 
-
 Both countries are present and titled *Korea, Dem. Rep.* and *Korea, Rep.*. Let us respectively rename them to North Korea and South Korea with the code below.
 
 ```{r}
@@ -35,17 +34,51 @@ levels(gapminder$country)[match("Korea, Dem. Rep.",levels(gapminder$country))] <
 levels(gapminder$country)[match("Korea, Rep.",levels(gapminder$country))] <- "SouthKorea"
 ```
 
-Next, we can simplify our data set to two ways. First we can create a data set that contains solely our two countries of interest. Second, we can select only the specific variables of interested in, these being country, year and life expectancy. Once this is accomplished we can create a table to hold the resulting output.
+Next, we can create our two data sets. First we can create a data set that contains solely North Korea and our variables of interest, year and life expectency. 
+
 
 ```{r}
-gapminder %>%
-filter(country == "NorthKorea" | country == "SouthKorea") %>%
-select(country, year, lifeExp) %>%
-kable(digits = 2, format="markdown",  col.names=c("Country","Year", "Life Expectency"), booktabs = T) 
+N.Korea <- gapminder %>% 
+  select(year, country, lifeExp) %>% 
+  filter(country=="NorthKorea") %>% 
+  select(year, lifeExp) 
+
+names(N.Korea)[names(N.Korea) == "lifeExp"] <- "N.lifeExp"
+
 ```
 
+Then we will create our second data set composed of South Korea and variables of interest.
+  
+```{r}
+S.Korea <- gapminder %>% 
+  select(year, country, lifeExp) %>% 
+  filter(country=="SouthKorea") %>% 
+  select(year, lifeExp) 
+names(S.Korea)[names(S.Korea) == "lifeExp"] <- "S.lifeExp"
+```
+
+For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us committ this join.
+
+```{r}
+N.S.Korea <- left_join(N.Korea, S.Korea)
+```
+
+As a side, I would like to rename "year" into "Year"
+
+```{r}
+names(N.S.Korea)[names(N.S.Korea) == "year"] <- "Year"
+```
+
+Now we can create a table through the *kable* function.
+
+```{r}
+N.S.Korea%>%
+kable(digits = 2, format="markdown",  col.names=c("Year","North Korea L.E.", "South Korean L.E."), booktabs = T) 
+```
+***L.E. = Life expectency
+
 The output appears as desired. However, it is a bit difficult to extract from this a meaningful interpretation. 
-A visualization here would be helpful and so let us plot life expectancy over time for these two countries. In addition to this however we can include a key historical event that occurred in North Korea. During the years 1994 to 1998 North Korea experienced an extreme [famine](https://en.wikipedia.org/wiki/North_Korean_famine), we can capture this time period in our graph through the use of dotted vertical lines. 
+A visualization here would be helpful and so let us plot life expectancy over time for these two countries.
 
 ```{r}
 #My preferred aesthetic theme
@@ -55,11 +88,30 @@ a_theme = theme(panel.grid.major = element_blank(),
                 legend.key = element_blank(),
                 axis.line = element_line(color = "black"))
 
-#Data preparation
+#Data plotting  
+N.S.Korea %>%
+ggplot(aes(x = N.lifeExp, y = S.lifeExp))+
+geom_point(aes(color = Year), size = 3) +
+geom_text(aes(label = Year), color = "black", size = 2.5, hjust = -.5)+ #move around text with hjust
+scale_y_continuous(expand= c(0,0), breaks=seq(45,80,5), lim = c(45,80)) + #Set Y axis increments and range
+scale_x_continuous(breaks=seq(45,80,5), lim = c(45,80)) + #Set X axis increments and range
+xlab("North Korean Life Expectancy") + #Title X axis
+ylab("South Korean Life Expectancy") + #Title Y axis
+theme(legend.position="none")+# remove legend  
+a_theme
+
+```
+  
+From this figure we can see that although life expectency has generally been increasing for both countries, North Korea has had a small dip in more recent years. While this plot contains the information we are interested in, I would rather renconstruct a line figure from the original gapminder data. Since this is a topic we are already persuing and one I am interested in, I will take the opportunity to do this and practise ggplot. 
+
+Below is a line graph in which the life expectency of both countries is plotted over time. In addition to this however we can include a key historical event that occurred in North Korea. During the years 1994 to 1998 North Korea experienced an extreme [famine](https://en.wikipedia.org/wiki/North_Korean_famine), we can capture this time period in our graph through the use of dotted vertical lines. 
+
+```{r}
+#Data preparation  
 gapminder %>%
 group_by(year) %>%
 filter(country == "NorthKorea" | country == "SouthKorea") %>%
-select(country, year, lifeExp) %>%
+select(country, year, lifeExp) %>%  
   
 #Data plotting  
 ggplot(aes(x = year, y = lifeExp, group = country))+
@@ -76,7 +128,7 @@ scale_x_continuous(breaks=seq(1952,2007,5), lim = c(1952,2007)) + #Set X axis in
 a_theme
 ```
 
-There are various points emerging from this figure. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean Famine, and after, the divide between the two countries further grew and exasperated.
+There are various points emerging from this figure that I believe are easier to spot compared to the original plot we created. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean Famine, and after, the divide between the two countries further grew and exasperated.
 
 ### Task 2: Join, merge, look up
 
