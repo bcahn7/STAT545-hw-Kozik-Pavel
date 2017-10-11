@@ -385,7 +385,7 @@ PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000)
 PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
 ```
 
-Both data frames now are ready to be joined. This time we will use the *left\_join* function.
+Both data frames now are ready to be joined. This time we will use the *left join* function.
 
 ``` r
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -998,7 +998,7 @@ The resulting scatter plot does not seem to make visible any immediate or obviou
 
 *This is really an optional add-on to either of the previous activities.* *Explore the base function merge(), which also does joins. Compare and contrast with dplyr joins.* *Explore the base function match(), which is related to joins and merges, but is really more of a “table lookup”. Compare and contrast with a true join/merge.*
 
-Let us go back and join two data sets using the *left\_join* function
+Let us go back and join two data sets using the *left join* function
 
 ``` r
 HealthMinder <- left_join(gapminder2007, PD2007)
@@ -1072,7 +1072,7 @@ head(as.data.frame(Merge_HealthMinder))
     ## 5              <NA>          0.732                   NA             0.732
     ## 6             1.707           1.14                1.707             1.140
 
-Quickly evident is that Angola and Albania appear within the data set created through *left\_join* but not *merge*.
+Quickly evident is that Angola and Albania appear within the data set created through *left join* but not *merge*.
 
 The merge function as such produces us a data set for which entries in the matching variable are in both data sets. In our case, both countries have to be listed, to be produced in the final data frame. R documentation writes similarly when reading about the merge function, *"The rows in the two data frames that match on the specified columns are extracted, and joined together."*
 
