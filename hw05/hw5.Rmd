@@ -1,0 +1,255 @@
+---
+title: "hw5"
+output: html_document
+---
+
+```{r setup, echo = TRUE, message=F, warning=F}
+library(RColorBrewer)
+library(gapminder)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(forcats)
+
+#Aesthetic Preference
+a_theme = theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                legend.key = element_blank(),
+                axis.line = element_line(color = "black"))
+```
+
+*Drop Oceania. Filter the Gapminder data to remove observations associated with the continent of Oceania. Additionally, remove unused factor levels. Provide concrete information on the data before and after removing these rows and Oceania; address the number of rows and the levels of the affected factors.*
+
+
+Begining our data analysis, let us do a simple comparison of the different continents on their life expectency. This can help us know the shape of our data distribution and an estimation of how fill our cells are.
+
+```{r}
+
+gapminder %>%
+ggplot(aes(x = lifeExp))+
+geom_histogram(aes(fill = continent), color = "black") + 
+scale_fill_manual(values=brewer.pal(n=5, "Dark2")) + #The dark2 color aesthetic is great
+scale_color_manual(values=brewer.pal(n=5, "Dark2")) + 
+
+ #Since we are using facet_wrap lets also make it look nice
+
+facet_wrap(~continent)+
+ theme(strip.background = element_rect(fill="Orange"),
+          axis.title = element_text(size=14),
+          strip.text = element_text(size=14, face="bold"))+
+a_theme #My otherwise predefined aesthetic preference
+
+```
+
+
+First, there is a clear discrepency in the sample size of each continent. Oceania very clearly is less well representated and sampled than the other continents. The summary function here is helpful.
+
+```{r}
+summary(gapminder$continent)
+```
+
+More specifially Oceania is composed of only 24 data points. How many countries are represented?
+
+```{r}
+gapminder %>%
+filter(continent == "Oceania") %>%
+select(country) %>%
+unique()
+```
+
+Only two countries are represented for Oceania, Australia and New Zealand. Given the little sampling and few countries we can now somewhat justify the first task of our assignment in removing this continent. 
+
+```{r}
+gapminder_NoOceania <- gapminder %>% 
+  filter(continent !="Oceania")
+
+summary(gapminder_NoOceania)
+```
+
+Interesting Oceania still appears in the summary but not the count command
+
+
+```{r}
+gapminder_NoOceania <- gapminder_NoOceania %>% droplevels()
+summary(gapminder_NoOceania)
+```
+
+Everything appears in order, lets double check what the data frame was like before, and after dropping oceania.
+
+The original gapminder (before dropping Oceania):
+
+```{r}
+dim(gapminder)
+```
+
+There are 1704 rows (observations) by 6 columns (Variables). After dropping Oceania we should find the number of rows to decrease by 24, as there will now be 24 less country entries. The number of columns however should remain the same, as we are not removing a variable but only a level of a variable.
+
+
+
+```{r}
+dim(gapminder_NoOceania)
+```
+
+We have exactly the expected outcome, 1680 rows by 6 variables. If we do a specific continent comparison via count, we should similarly find that the original gapminder has 24 entries of Oceania and the new dropped data base will not have these entries.
+
+
+```{r}
+gapminder %>% 
+  count(continent)
+
+gapminder_NoOceania %>% 
+  count(continent)
+```
+
+
+*Reorder the levels of country or continent. Use the forcats package to change the order of the factor levels, based on a principled summary of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the median.*
+
+Lets take a look at what continents we still have and their data distrubtion.
+
+```{r}
+gapminder_NoOceania %>%
+ggplot(aes(x = lifeExp))+
+geom_histogram(aes(fill = continent), color = "black") + 
+facet_wrap(~continent) +
+scale_fill_manual(values=brewer.pal(n=5, "Dark2")) +
+scale_color_manual(values=brewer.pal(n=5, "Dark2")) + 
+theme(strip.background = element_rect(fill="Orange"),
+          axis.title = element_text(size=14),
+          strip.text = element_text(size=14, face="bold"))+
+a_theme
+```
+
+
+Their order seems to be alphabetical
+
+```{r}
+gapminder_NoOceania$continent %>%
+  levels()
+```
+
+We can do some trivial reorganziing, like reverse alphabetical order
+
+```{r}
+gapminder_NoOceania$continent %>%
+  levels() %>%
+  fct_rev() 
+```
+
+
+Instead however lets reorganize on the basis of mean life expectency, which we can calculate as below.
+
+```{r}
+gapminder_NoOceania %>%
+group_by(continent) %>%
+summarize(MeanLife = mean(lifeExp)) %>%
+arrange(MeanLife)
+```
+
+This informs us that after we refactor, we should find Africa, Asia, Americas and Europe in that order. This can serve as a proof or check of our code.
+
+```{r}
+fct_reorder(gapminder_NoOceania$continent, gapminder_NoOceania$lifeExp, mean) %>% 
+  levels() 
+```
+
+Let us reorganize from high to low instead. 
+
+```{r}
+gapminder_continent <- fct_reorder(gapminder_NoOceania$continent, gapminder_NoOceania$lifeExp, mean,  .desc = TRUE) 
+
+gapminder_continent%>% 
+  levels() 
+```
+
+Excellent, but not very interesting. Let us dive deeper into the dataset and reorganize countries on the basis of mean life expectency.
+
+```{r}
+gapminder_country <- fct_reorder(gapminder_NoOceania$country, gapminder_NoOceania$lifeExp, mean,  .desc = TRUE)
+
+
+gapminder_country%>% 
+  levels() 
+```
+
+This gives us an exhaustive listing and probably more than we need. We can further refine by digging into a specific continent. Before going forward however lets pracitse
+writing and reading to files.
+
+Saving and reading files ####
+
+write_csv(gapminder_country, "gapminder_country.csv")
+write_csv(gapminder_continent, "gapminder_continent.csv")
+
+
+Let's focus on the most sampled continent, Europe. 
+
+We can create a graph in which the life expectency of all European countries are plotted for all years of data collection. 
+
+
+```{r}
+gapminder_NoOceania %>%
+filter(continent == "Europe") %>%
+ggplot(aes(x = lifeExp, y = fct_reorder(country, lifeExp, mean))) +
+geom_point() 
+```
+
+This graph is a bit difficult to visually decipher. Let us use try and harness visualiation design to step forward.
+
+The first problem and perhaps most trivial is teh aesthetic appearance of the figure. I personally prefer to remove the grey background and grid of figures, and I like to have a solid black line for the X and Y axis. I typically accomplish this by creating a variable which contains all my figure aesthetic preferences. I usually have this defined near the top of the R file but will also provide it in the code below for completeness.
+
+
+```{r}
+#Since we will be reusing this variable, lets designate it.
+Europe <-  gapminder_NoOceania %>%
+filter(continent == "Europe")
+
+
+ggplot(data = Europe, (aes(x = lifeExp, y = fct_reorder(country, lifeExp, mean)))) +
+  geom_point() +
+  a_theme #The call of my aesthetic preferences
+```
+
+The second problem is that all entries of life expectency are identical in appearance. That is, although each dot represents a different measurement point in time there is no way for the viewer to decipher these. Let us create the example where, we want viewers to most focus on more recent years of data collection, and less so earlier years. We can attempt this feat by applying a tranparency gradient for the year variable.
+
+```{r}
+ggplot(data = Europe, (aes(x = lifeExp, y = fct_reorder(country, lifeExp, mean)))) +
+  geom_point(aes(alpha = year)) + #Transparency set by year
+  scale_alpha_continuous("Year", range = c(0.1, .6)) + #The range of transparency we think is suitable
+  a_theme 
+```
+
+
+The third issue is although we are showing to the viewer the life expectency of each country for any given year,  we are organizing countries based on overall life expectency. Thus the value for which countries are being organized is not actually shown in the figure (rather the values used to create the mean are). 
+
+Lets create a mean of each countries life expectency
+
+```{r}
+MeanEurope <- gapminder_NoOceania %>%
+#filter(year == 2007) %>%
+group_by(country) %>%
+filter(continent == "Europe") %>%
+summarize(MeanLife = mean(lifeExp)) 
+```
+
+```{r}
+  ggplot(data = Europe, (aes(x = lifeExp, y = fct_reorder(country, lifeExp, mean)))) +
+  geom_point(aes(alpha = year)) + 
+  scale_alpha_continuous("Year", range = c(0.1, .6)) +
+  geom_point(data = MeanEurope, aes(x = MeanLife, y = country), 
+  color = "brown", size = 2) +  # call our new data frame
+  a_theme 
+```
+
+
+However, want to move the legend inside the plot, and as well show what the brown dots mean.
+    
+```{r}
+ggplot(data = Europe, (aes(x = lifeExp, y = fct_reorder(country, lifeExp, mean)))) +
+  geom_point(aes(alpha = year)) + 
+  scale_alpha_continuous("Year", range = c(0.1, .6)) +
+  geom_point(data = MeanEurope, aes(x = MeanLife, y = country), color = "blue", size = 2)+
+  theme(legend.position = c(.95, 0.8)) + #Put the legend inside the plot
+  annotate(geom = "point", x = 85.65, y = 18, size = 2, color = "blue") +
+  scale_x_continuous(expand= c(0,0), breaks=seq(40,90,5), lim = c(40,90)) +
+  a_theme 
+```
