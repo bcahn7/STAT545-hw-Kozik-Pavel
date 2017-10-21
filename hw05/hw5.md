@@ -486,8 +486,8 @@ LifePlot <- ggplot(data = Europe, (aes(y = lifeExp, x = fct_reorder(country, lif
   theme(legend.position = c(0.5, .1), legend.direction="horizontal", legend.title=element_blank())+
   ylab("Life Expectancy") +
   xlab("European Country") +
-  annotate(geom = "text", x = 25.1, y = 36, size = 3.3, color = "black", label = "Mean")+
-  annotate(geom = "point", x = 23.6, y = 35.8, size = 2, color = "coral2") +
+  annotate(geom = "text", x = 24.4, y = 36, size = 3.3, color = "black", label = "Mean")+
+  annotate(geom = "point", x = 23, y = 35.8, size = 2, color = "coral2") +
   ggtitle("Life Expectency of Different European Countries Across Study Years")+
   theme(plot.title = element_text(hjust = 0.5))+
   a_theme 
@@ -496,9 +496,11 @@ LifePlot <- ggplot(data = Europe, (aes(y = lifeExp, x = fct_reorder(country, lif
 Rather than showing the result, I will instead save this final figure
 
 ``` r
-ggsave("LifeExpByEuro.pdf", plot = LifePlot, dpi = 600)
+ggsave("LifeExpByEuro.png", plot = LifePlot, dpi = 600)
 ```
 
     ## Saving 7 x 5 in image
 
 and will upload it here:
+
+![Life expectency figure created through R](C:/Users/Pavel/Desktop/STAT545-hw-Kozik-Pavel/hw05/LifeExpByEuro.png)
