@@ -1,6 +1,6 @@
 ### Homework 5 STAT 545
 
-Here is a [link to homework 5](hhttps://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05%20-%20Novel%20colors%20and%20brewer%2C%20refactoring%2C%20ggsave%20and%20improving%20figure%20quality/hw5.md) in which gapminder data was refactored, organized, saved, plots created and modified to look nicer. If there is an interest, here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05%20-%20Novel%20colors%20and%20brewer%2C%20refactoring%2C%20ggsave%20and%20improving%20figure%20quality/hw5.Rmd) as well.
+Here is a [link to homework 5](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05%20-%20Novel%20colors%20and%20brewer%2C%20refactoring%2C%20ggsave%20and%20improving%20figure%20quality/hw5.md) in which gapminder data was refactored, organized, saved, plots created and modified to look nicer. If there is an interest, here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05%20-%20Novel%20colors%20and%20brewer%2C%20refactoring%2C%20ggsave%20and%20improving%20figure%20quality/hw5.Rmd) as well.
 
 ### Progpress Report
 
