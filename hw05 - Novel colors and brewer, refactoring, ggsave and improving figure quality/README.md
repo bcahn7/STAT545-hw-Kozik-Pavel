@@ -6,7 +6,7 @@ Here is a [link to homework 5](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/bl
 
 This homework assignment in numerous ways required the culmination of course topics. There was material relevant from the first, to the last lecture, and required considerable input from each. To that extent the project was timely in that knowledge from multiple different facets was required.
 
-One difficult aspect was verifying that refactoring was being done as expected. To overcome this, I relied on filtering and summarizing functions to ensure both processes agreed. 
+One difficult aspect was verifying that refactoring was being done as expected. To overcome this, I relied on filtering and summarizing functions to ensure both processes agreed. Reorganizing and renaming my github folders was fairly simple as well once I did so through RStudio.
 
 A few problems that were less obvious to overcome concerned the reading of files. I ultimately relied on read.csv because the summary output seemed in better order than the use of read_csv. The former seemed to better maintain how the data had been before it was saved and read, while the latter converted my continents into "characters" and did not seem to maintain their distinct individual levels.
 
