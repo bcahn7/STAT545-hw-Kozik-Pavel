@@ -1,0 +1,502 @@
+---
+title: "Homework 4"
+output: github_document
+---
+
+###Load relevant libraries
+```{r setup, include=FALSE}
+library(gapminder)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+### Task 1: General data reshaping and relationship to aggregation
+
+*Activity #2*
+
+*Make a tibble with one row per year and columns for life expectancy for two or more countries.*
+*Use knitr::kable() to make this table look pretty in your rendered homework.*
+*Take advantage of this new data shape to scatter plot life expectancy for one country against that of another.*
+
+To complete this question we will do a comparison of two relatively new countries that resulted from the splitting of Korea.  These countries being the Democratic People's Republic of Korea and the Republic of Korea. While these are the official titles of both countries more colloquially they are often referred to as North Korea and South Korea. For this assignment I will use these latter names. 
+
+Let us first identify these countries within our data set
+
+```{r}
+unique(gapminder$country)
+```
+
+Both countries are present and titled *Korea, Dem. Rep.* and *Korea, Rep.*. Let us respectively rename them to North Korea and South Korea with the code below.
+
+```{r}
+levels(gapminder$country)[match("Korea, Dem. Rep.",levels(gapminder$country))] <- "NorthKorea"
+levels(gapminder$country)[match("Korea, Rep.",levels(gapminder$country))] <- "SouthKorea"
+```
+
+Next, we can create our two data sets. First we can create a data set that contains solely North Korea and our variables of interest, year and life expectancy. 
+
+
+```{r}
+N.Korea <- gapminder %>% 
+  select(year, country, lifeExp) %>% 
+  filter(country=="NorthKorea") %>% 
+  select(year, lifeExp) 
+
+names(N.Korea)[names(N.Korea) == "lifeExp"] <- "N.lifeExp"
+
+```
+
+Then we will create our second data set composed of South Korea and variables of interest.
+  
+```{r}
+S.Korea <- gapminder %>% 
+  select(year, country, lifeExp) %>% 
+  filter(country=="SouthKorea") %>% 
+  select(year, lifeExp) 
+names(S.Korea)[names(S.Korea) == "lifeExp"] <- "S.lifeExp"
+```
+
+For both data sets we also renamed the variable "lifeExp" so that the only variable the two data sets shared, and could be joined on, is "year". Let us commit this with a *right join*.
+
+```{r}
+N.S.Korea <- right_join(S.Korea, N.Korea)
+```
+
+As a side, I would like to rename "year" into "Year"
+
+```{r}
+names(N.S.Korea)[names(N.S.Korea) == "year"] <- "Year"
+```
+
+Now we can create a table through the *kable* function.
+
+```{r}
+N.S.Korea%>%
+kable(digits = 2, format="markdown",  col.names=c("Year","North Korea L.E.", "South Korean L.E."), booktabs = T) 
+```
+***L.E. = Life expectancy
+
+The output appears as desired. However, it is a bit difficult to extract from this a meaningful interpretation. 
+A visualization here would be helpful and so let us plot life expectancy over time for these two countries.
+
+```{r}
+#My preferred aesthetic theme
+a_theme = theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                legend.key = element_blank(),
+                axis.line = element_line(color = "black"))
+
+#Data plotting  
+N.S.Korea %>%
+ggplot(aes(x = N.lifeExp, y = S.lifeExp))+
+geom_point(aes(color = Year), size = 5) +
+geom_text(aes(label = Year), color = "black", size = 3.5, hjust = -.5)+ #move around text with hjust
+scale_y_continuous(expand= c(0,0), breaks=seq(45,80,5), lim = c(45,80)) + #Set Y axis increments and range
+scale_x_continuous(breaks=seq(45,80,5), lim = c(45,80)) + #Set X axis increments and range
+xlab("North Korean Life Expectancy") + #Title X axis
+ylab("South Korean Life Expectancy") + #Title Y axis
+theme(legend.position="none")+# remove legend  
+a_theme
+
+```
+  
+From this figure we can see that although life expectancy has generally been increasing for both countries, North Korea has had a small dip in more recent years with life expectancy declining. While this plot contains the information we are interested in, I would rather reconstruct a line figure from the original gapminder data. Since this is a topic we are already pursuing and one I am interested in, I will take the opportunity to do this and practice plotting. 
+
+Below is a line graph in which the life expectancy of both countries is plotted over time. In addition to this however we can include a key historical event that occurred in North Korea. During the years 1994 to 1998 North Korea experienced an extreme [famine](https://en.wikipedia.org/wiki/North_Korean_famine), we can capture this time period in our graph through the use of dotted vertical lines. 
+
+```{r}
+#Data preparation  
+gapminder %>%
+group_by(year) %>%
+filter(country == "NorthKorea" | country == "SouthKorea") %>%
+select(country, year, lifeExp) %>%  
+  
+#Data plotting  
+ggplot(aes(x = year, y = lifeExp, group = country))+
+geom_point(aes(color = country), size = 2) + 
+geom_line(aes(color = country))+
+scale_color_manual(values=c("cornflowerblue", "coral3"), name = "Country")+ #Select colors I like
+xlab("Year")+ #Rename X axis
+ylab("Life Expectancy")+ #Rename Y Axis
+geom_segment(x = 1994, xend = 1994, y = 0, yend=83,  color = "black", linetype = "longdash", size = .5) + #Starti of time window
+geom_segment(x = 1998, xend = 1998, y = 0, yend=83,  color = "black", linetype = "longdash", size = .5) + #End of time window
+annotate("text", x = 1996, y = 84, size = 3, color = "black", label = c("North Korean Famine")) +
+scale_y_continuous(expand= c(0,0), breaks=seq(45,85,5), lim = c(45,85)) + #Set Y axis increments and range
+scale_x_continuous(breaks=seq(1952,2007,5), lim = c(1952,2007)) + #Set X axis increments and range
+a_theme
+```
+
+There are various points emerging from this figure that I believe are easier to spot compared to the original plot we created. One broad note is that North Korea had a higher life expectancy than South Korea during the early study years. Over time however this changed. Starting in the early 1990's life expectancy in North Korea declined while in South Korea life expectancy continued to increase. During the time period of the North Korean famine, and after, the difference between the two countries further grew and exasperated.
+
+### Task 2: Join, merge, look up
+
+*Activity #1*
+
+*Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a  dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:*
+
+*- One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city. If you really want to be helpful, you could attempt to make a pull request to resolve this issue, where I would like to bring ISO country codes into the gapminder package.*
+
+*- One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.*
+
+To address this question having a specific focus is important. I will first simplify my data set to include only data collected during the final year of gapminder data collection, 2007. Then I will identify data sets that to collected during this year to allow a comparison of different countries during the same year. 
+
+```{r}
+#Simplify gapminder to only have data from 2007
+gapminder2007 <- gapminder %>% 
+  filter (year == 2007)
+```
+
+####Health Statistics
+
+One option of complimentary data may be provided by the [World Health Organization (WHO)](http://www.who.int/en/). Specifically, we can consider [data in which physican and dentist densisty was measured in different countries](http://apps.who.int/gho/data/view.main.92100).
+
+[*direct download link for those interested*](http://apps.who.int/gho/athena/data/data.xls?target=GHO/HRH_26,HRH_33,HRH_28,HRH_25,HRH_27,HRH_31,HRH_29,HRH_30,HRH_32&format=xml&profile=excel-xtab&filter=COUNTRY:*&x-sideaxis=COUNTRY;YEAR&x-topaxis=GHO)
+
+
+
+```{r, warning= FALSE}
+#Load the data set into R
+library(readxl)
+PD <- read_excel("C:/Users/Pavel/Desktop/Physician Density.xls.xlsx", sheet = "data-text")
+```
+
+When working with a new data set it is important to inspect the data frame itself and to become familiar with the variables themselves.  
+
+```{r}
+head(PD)
+names(PD)
+```
+
+The result is a bit messy. To alleviate this, and for brevity and simplicity, we will rename our variables of interest.
+
+```{r}
+names(PD)[names(PD) == "Year (string)"] <- "Year"
+names(PD)[names(PD) == "Physicians density (per 1000 population) (string)"] <- "PhysiciansPer1000"              
+names(PD)[names(PD) == "Dentistry personnel density (per 1000 population) (string)"] <- "DentistPer1000"  
+```
+
+Because we will be merging data sets on the basis of country, we also want to make sure that this data set uses the variable name "country" as written in gapminder.
+
+```{r}
+names(PD)[names(PD) == "Country (string)"] <- "country"
+```
+
+Like gapminder, we will focus only on data collected in 2007. Let us filter this data set to do so, and then we can extract our specific variables of interest: country, year, physician density and dentist density.
+
+```{r}
+#Data prep and organization
+
+PD2007 <- PD %>%
+filter(Year == 2007) %>%
+select(country, Year, PhysiciansPer1000, DentistPer1000)
+```
+
+A quick glimpse to ensure we have what we want and nothing has gone wrong.
+
+```{r}
+head(PD2007)
+```
+
+The data appears as desired on first inspection. Let us consider if the data types are as we would like them to be.
+
+```{r}
+str(PD2007)
+```
+
+All variable types in PD2007 are listed as characters. One thing that might benefit us to do now rather than later is to convert the numeric variables into a numeric format. 
+
+```{r}
+PD2007$NumPhysiciansPer1000 <- as.numeric(as.character(PD2007$PhysiciansPer1000))
+PD2007$NumDentistPer1000 <- as.numeric(as.character(PD2007$DentistPer1000))
+```
+
+Both data frames now are ready to be joined. This time we will use the *left join* function. 
+
+```{r}
+HealthMinder <- left_join(gapminder2007, PD2007)
+```
+
+Let us run a few summary statistics on this joint data set titled *HealthMinder*. 
+
+```{r}
+summary(HealthMinder)
+```
+
+The merge was successful and now we can begin asking novel questions. For instance, is there a relationship between the physician density and life expectancy. A scatter plot here can help.
+
+```{r warning = FALSE}
+HealthMinder %>%
+  ggplot(aes(x = NumPhysiciansPer1000, y = lifeExp))+
+  geom_point() +
+  a_theme +
+  ylab("Life Expectancy") +
+  xlab("Physican Density Per 1000 Population") 
+```
+
+A positive relationship seems tenable, as physician density increases as does life expectancy. While an increase in physician density may help extend life expectancy there to are other potential factors at play. For instance a country capable of training numerous physicians may also have greater financial resources, more educational facilities or have other unique sociodemographic variables. 
+
+Solely for the purpose of practice and not to be taken seriously, let us do a very simple test of our supposed correlation. We will assume a linear trend for simplicity here even though one could argue there is a seemingly logarithmic or curve-like appearance to the actual data. To do the test we will use the *cor.test* function of the *psych package*.
+
+```{r, warning = FALSE, message = FALSE}
+library(psych)
+cor.test(x = HealthMinder$NumPhysiciansPer1000, y = HealthMinder$lifeExp)
+```
+Our oversimplified test suggests that there is a positive  correlation between physician density and life expectancy. Let us move on from here and consider dentist density through a figure.
+
+```{r warning= FALSE}
+HealthMinder %>%
+  ggplot(aes(x = NumDentistPer1000, y = lifeExp))+
+  geom_point() +
+  a_theme +
+  ylab("Life Expectancy") +
+  xlab("Dentist Density Per 1000 Population") 
+```
+
+Here to the data shape contains somewhat of a curve although something of a positive trend can be seen. As dentist density increases as does life expectancy. With the same forewarning as prior, but again for the purpose of practice, we will do a linear test of this trend.
+
+```{r}
+cor.test(x = HealthMinder$NumDentistPer1000, y = HealthMinder$lifeExp)
+```
+
+Although the correlation is smaller, a similar message is implied. 
+
+Density of medical staff like physicians and dentists would seem to perhaps associate positively with life expectancy. A future study approaching the topic with greater nuance and appropriate analysis may be promising. 
+
+####Crime Statistics
+  
+An additional and intriguing data set worth examining concerns crime rates rates of different countries. Here we will focus specifically on homicide rates as collected by the [United Nations Office on Drugs and Crime](http://www.unodc.org/)
+
+[*direct download link to data for those interested*](http://www.unodc.org/documents/data-and-analysis/dataportal/PublicationReports2017_1a.xlsx)
+
+
+```{r}
+#Load the data into R. Note that there are many different "sheets", e.g. assault, kidnapping, theft. We will select intentional homicide.
+HomicideData <- read_excel("C:/Users/Pavel/Desktop/HomicideData.xlsx", sheet = "Intentional homicide count rate")
+```
+
+As before let us take a look at the data.
+
+```{r}
+head(HomicideData)
+names(HomicideData)
+```
+
+This data set as evident will require greater organization and reshaping. It may be important to use the *View* function if one does not have a bearing on what the data set contains. 
+
+
+The first problem to address is that the first 8 rows of the data set are graphics and descriptive information. Removing them will bring us closer to something manageable.
+
+```{r}
+HomicideData <- HomicideData[-c(1:8), ] #Remove the first 8 rows of the data set
+head(HomicideData) #See how the new data set looks
+```
+
+The data is a bit easier to understand but still somewhat unclear. The next problem we must tackle is that variable names currently reside within the first row of the data set itself. We will need to move these over and adjust accordingly.  
+
+```{r}
+#Take the names of the first row
+my.names <- HomicideData[1,]
+#And apply them to be the title of the variable
+colnames(HomicideData) <- my.names
+#Then remove the first row
+HomicideData <- HomicideData[-c(1:1), ] 
+head(HomicideData)
+```
+
+Now we can clearly see a country variable and years for which homicide statistics were measured. Visible though is that the *country* variable is titled *Country/territory*, we will need to change this so it matches HealthMinder. In both cases we want the variable indexing different countries to be called "country".
+
+
+```{r}
+names(HomicideData)[names(HomicideData) == "Country/territory"] <- "country"
+
+#Lets look through this variable briefly
+unique(HomicideData$country)
+```
+
+The new variable works well but when we look at the contents there are a few NAs. While we could ignore this for the time being, it might be easier to handle this now rather than later given that we know our endgame goals. Let's remove rows that have an NA value within the country column.
+
+```{r}
+HomicideData <- HomicideData[!(is.na(HomicideData$country) | HomicideData$country==""), ]
+```
+
+As done in the prior data sets we want to limit our time span strictly to the year 2007. This data set however indexes years a bit differently, rather than having a single column with different years multiple columns are presented that contain homicide statistic for that specific year.
+
+Let us extract solely our variables of interest, *country* and homicides committed in *2007*.  
+
+
+```{r}
+#HomicideData %>%
+  #select(country, 2007)
+```
+
+Unfortunately this gives us an error: "Error in combine_vars(vars, ind_list) : Position must be between 0 and n"
+
+It would that seem using the name 2007 is problematic for the select function. We can both resolve this, and give a more informative variable title as follows. 
+
+```{r}
+names(HomicideData)[names(HomicideData) == "2007"] <- "HomicidesIn2007"
+```
+
+Let us try again to select our variables of interest, *country* and *HomicidesIn2007*. 
+
+```{r}
+#HomicideData2007 <- HomicideData %>%
+  #select(country, HomicidesIn2007)
+```
+
+Unfortunately there is another problem. 
+
+"Error in select_impl(.data, vars) : found duplicated column name: 2003, 2004, 2005, 2006, HomicidesIn2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015"
+
+The data set contains duplicate variable names. For instance we can see there multiple columns both sharing the name "2003"
+
+```{r}
+which(colnames(HomicideData)=="2003" )
+```
+
+This informs us that the 4th and 18th column are both titled "2003". Something that now must be addressed is that two different sets of homicide statistics are present. The first set of years measures homicide count per population whereas the second set of years measures homicide rate per population. 
+
+Let us focus exclusively on rate and so we can drop the unwanted variables having the same name which measure count. Because data was recorded from 2003 to 2015, columns 4 through 16 contain contain count data that we are not interested in. We can remove these columns.
+
+```{r}
+HomicideData <- HomicideData[,-(4:16)]
+```
+
+Let us try and select again our variables of interest.
+
+```{r}
+HomicideData2007 <- HomicideData %>%
+  select(country, HomicidesIn2007)
+```
+
+Since we have now done a few different steps, we should review the data set to make sure it is as expected.
+
+```{r}
+head(HomicideData2007)
+```
+
+We can also run a few summary statistics to see if errors or odd output emerges. In addition to this, let us identify what countries had the highest homicide rates in 2007 through the arrange function.
+
+```{r}
+HomicideData2007 %>%
+summary
+
+HomicideData2007 %>%
+arrange(desc(HomicidesIn2007))
+```
+
+As the output shows Iraq, Jamaica and El Salvador had the most homicides in 2007. 
+
+The data appears ready to merge. We will use *right join* this time.
+
+```{r}
+HomicideHealthMinder <- right_join(HomicideData2007, HealthMinder)
+```
+
+We can now ask a novel question. For instance, how did life expectancy in 2007 match homicide rate. 
+
+```{r warning = FALSE}
+HomicideHealthMinder %>%
+  ggplot(aes(x = HomicidesIn2007, y = lifeExp))+
+  geom_point() + 
+  xlab("Homicide Rate Per 100,000") +
+  ylab("Life Expectency") +
+  a_theme
+```
+
+The resulting scatter plot does not seem to make visible any immediate or obvious association. The relationship then between these two variables is likely much more nuanced and would require further inquiry. 
+
+
+
+###Task 3: Join, merge and match
+
+*Activity #3*
+
+*This is really an optional add-on to either of the previous activities.*
+*Explore the base function merge(), which also does joins. Compare and contrast with dplyr joins.*
+*Explore the base function match(), which is related to joins and merges, but is really more of a “table lookup”. Compare and contrast with a true join/merge.*
+
+
+Let us go back and join two data sets using the *left join* function
+
+```{r}
+HealthMinder <- left_join(gapminder2007, PD2007)
+dim(HealthMinder)
+```
+
+
+This results in a data frame with 142 observations and 11 columns.
+
+
+We can contrast this with the *merge* function
+
+
+```{r}
+Merge_HealthMinder <- merge(gapminder2007, PD2007)
+dim(Merge_HealthMinder)
+```
+
+This results in a much smaller data frame with 49 observations for 11 columns.
+
+Why do these two functions differ?
+
+To answer this we can look up the functions i.e. *?left_join* and *?merge*
+
+Or alternatively we can try and see if a visual difference can be found
+
+
+```{r}
+head(as.data.frame(HealthMinder))
+head(as.data.frame(Merge_HealthMinder))
+```
+
+Quickly evident is that Angola and Albania appear within the data set created through *left join* but not *merge*. 
+
+The merge function as such produces us a data set for which entries in the matching variable are in both data sets. In our case, both countries have to be listed, to be produced in the final data frame. R documentation writes similarly when reading about the merge function, *"The rows in the two data frames that match on the specified columns are extracted, and joined together."*
+
+Next the *match* function.
+
+```{r}
+Match_HealthMinder <- match(gapminder2007, PD2007)
+Match_HealthMinder
+```
+
+Using *match* produces a result of NA values. Something clearly is not working. The R documentation suggests this function is more useful for table indexing. Let us see if we can index what years in gapminder2007 match the years in PD2007.
+
+```{r}
+Match_HealthMinder <- match(gapminder2007$year, PD2007$Year)
+Match_HealthMinder
+length(Match_HealthMinder)
+```
+
+The result is 142 instances of the value 1. This would seem to suggest every instance of *gapminder2007* matches every instance of *PD2007* for year, and this is indeed true because *2007* is the only value each variable holds.
+
+```{r}
+unique(gapminder2007$year)
+unique(PD2007$Year)
+```
+
+Match then is telling us which values in the two data frames *match* or that is, are identical. We can then for instance use match to index the location of matching countries within the two data sets.
+
+```{r}
+Match_HealthMinder <- match(gapminder2007$country, PD2007$country)
+Match_HealthMinder
+```
+
+Deciphering this, the first country of *gapminder2007* should match the 47th country in *PD2007*.
+
+```{r}
+as.character(gapminder2007$country)[1]
+PD2007$country[47]
+```
+
+Another example is, the third country of *gapminder2007* country should match the first country of *PD2007*.
+
+```{r}
+as.character(gapminder2007$country)[3]
+PD2007$country[1]
+```
+
+By using the match function we can thus identify what the matching countries are and where they are indexed in our two data sets. 
