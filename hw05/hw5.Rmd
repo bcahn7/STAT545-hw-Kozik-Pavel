@@ -339,4 +339,4 @@ ggsave("LifeExpByEuro.png", plot = LifePlot, dpi = 600)
 
 and will upload it here:
 
-![Life expectency figure created through R](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05/LifeExpByEuro.pdf)
+![](C:/Users/Pavel/Desktop/STAT545-hw-Kozik-Pavel/hw05/LifeExpByEuro.png)
