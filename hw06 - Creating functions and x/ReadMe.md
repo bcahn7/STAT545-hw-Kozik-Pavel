@@ -1,6 +1,6 @@
 ### Homework 5 STAT 545
 
-Here is a [link to homework 6]() concerning the creation of functions and working with nested data frames. Here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw05%20-%20Novel%20colors%20and%20brewer%2C%20refactoring%2C%20ggsave%20and%20improving%20figure%20quality/hw5.Rmd) for those interested.
+Here is a [link to homework 6](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20x/hw06.md) concerning the creation of functions and working with nested data frames. Here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20x/hw06.Rmd) for those interested.
 
 ### Progpress Report
 
