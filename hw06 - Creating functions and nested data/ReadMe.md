@@ -1,6 +1,6 @@
 ### Homework 6 STAT 545
 
-Here is a [link to homework 6](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20x/hw06.md) concerning the creation of functions and working with nested data frames. Here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20x/hw06.Rmd) for those interested.
+Here is a [link to homework 6](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20nested%20data/hw06.md) concerning the creation of functions and working with nested data frames. Here is the associated [rmd file](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw06%20-%20Creating%20functions%20and%20nested%20data/hw06.Rmd) for those interested.
 
 ### Progpress Report
 
