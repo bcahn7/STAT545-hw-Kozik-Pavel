@@ -1,0 +1,533 @@
+---
+title: "Homework 6"
+output: github_document
+---
+
+##Writing functions
+
+*Write one (or more) functions that do something useful to pieces of the Gapminder or Singer data. It is logical to think about computing on the mini-data frames corresponding to the data for each specific country, location, year, band, album, … This would pair well with the prompt below about working with a nested data frame, as you could apply your function there.*
+
+*Make it something you can’t easily do with built-in functions. Make it something that’s not trivial to do with the simple dplyr verbs. The linear regression function presented here is a good starting point. You could generalize that to do quadratic regression (include a squared term) or use robust regression, using MASS::rlm() or robustbase::lmrob().*
+
+*If you plan to complete the homework where we build an R package, write a couple of experimental functions exploring some functionality that is useful to you in real life and that might form the basis of your personal package.*
+
+------
+
+&nbsp;
+
+One task I have done for past assignments was calculating a standard error. Having a function to do this quickly on a given variable would be useful. We can begin this task with this goal in mind. A refresher on the formula:
+
+<p align="center">
+<img src="http://jungminded.weebly.com/uploads/1/3/5/8/13582285/7285766_orig.jpeg?160", height="75px" width="100px">
+</p>
+
+To calculate a standard error we will need to know the standard deviation of a given variable, and its number of observations. We can obtain this information through already built in functions. We can use *sd* to calculate a standard deviation and *length* to measure number of observations.
+
+
+```{r setup, echo = TRUE, message=F, warning=F}
+#A function that takes a numeric value in x and returns a standard error
+SE <- function(x) sd(x) / sqrt(length(x))
+```
+
+Lets test the function with numeric values:
+
+```{r}
+#Load a library for us to have data
+library(gapminder)
+
+#Make sure we are dealing with numeric values
+class(gapminder$lifeExp)
+class(gapminder$pop)
+
+#Testing the new function
+SE(gapminder$lifeExp)
+SE(gapminder$pop)
+```
+
+The function works as desired. We should also make sure the function crashes when it should, let us try the function with a non-numeric value. 
+
+```{r}
+#A non-numeric variable
+class(gapminder$country)
+
+#The funciton should crash
+SE(gapminder$country)
+```
+
+The function along with a cryptic warning provides a numeric value. We can both make the warning less cryptic, and ensure no incorrect or meaningless output is provided.  
+
+```{r}
+#If the value of x is not numeric (designated by !is.nuermic) then stop the function
+#and print an error message. Let the reader also know what object they had attempted to insert
+
+SE <- function(x) {
+  if(!is.numeric(x)) {
+    stop('This function calculates a standard error and as such requires numeric\n',
+         'values. You have instead provided an object of class: ', class(x)[1])
+  }
+  S <- sd(x) / sqrt(length(x))
+  S <- setNames(S, c("Standard Error:"))
+  return(S)
+}
+```
+
+Lets try the function again.
+
+```{r}
+class(gapminder$country)
+#SE(gapminder$country)
+#Error in SE(gapminder$country) : 
+#This function calculates a standard error and as such requires numeric
+#values. You have instead provided an object of class: factor
+```
+
+The function crashed (and had to be commented out above) and provided the desired error text output. 
+
+R also does not seem to have a function for obtaining modal values. Although not often used as a measure of central tendency, there might be instances where the mode is of use. We can create a function to identify the mode of a data set.
+
+```{r}
+#Identify all the unique values of x and then through which.max(tabulate) identify the most frequently occuring value.
+
+Mode <- function(x) {
+  if(!is.numeric(x)) {
+    stop('This function calculates a standard error and as such requires numeric\n',
+         'values. You have instead provided an object of class: ', class(x)[1])
+  }
+  Values <- unique(x)
+  Values[which.max(tabulate(match(x, Values)))] 
+}
+```
+
+&nbsp;
+
+The code below produces a variable containing many numbers, but as visible the most frequently occurring one is 3. We can test our mode function accordingly.
+
+```{r}
+#A variable with different values in which 3 is the most reoccuring.
+ModeTest <- c(1,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,5,5,5,5,6,6,6,6,6,7,7,8,9)
+Mode(ModeTest)
+```
+
+We can combine these two new functions, one for calculating standard errors and another for finding the mode. Further, we can add various other descriptive statistics including the mean, median, and others. Such a function can help us learn a great deal about a given variable.  
+
+```{r}
+Descriptives <- function(x) {
+  if(!is.numeric(x)) {
+    stop('This function calculates a standard error and as such requires numeric\n',
+         'values. You have instead provided an object of class: ', class(x)[1])
+  }
+  SE <- sd(x) / sqrt(length(x))
+  M <- mean(x)
+  Med <- median(x)
+  Mod <- Mode(x)
+  R <- max(x) - min(x)
+  V <- var(x)
+  SD <- sd(x)
+  SZ <- length(x)
+  #We want to title all the descriptive statistics so they are easily identified.
+  M <- setNames(M, c("Mean:"))
+  Med<- setNames(Med, c("Median:"))
+  Mod<- setNames(Mod, c("Mode:")) 
+  V <- setNames(V, c("Variance:"))
+  SD <- setNames(SD, c("Standard Deviation:"))
+  SE <- setNames(SE, c("Standard Error:"))
+  R <- setNames(R, c("Range:"))
+  SZ <- setNames(SZ, c("Observations:"))
+  out <-c(M,Med,Mod,V, SD, SE, R, SZ)
+  print(out)
+}
+```
+
+&nbsp;
+
+Now we can test this function
+
+```{r}
+Descriptives(gapminder$lifeExp)
+```
+
+Everything appears as desired. We can now also use the *map* function so as to run the *Descriptives* function on more than one variable at a time. 
+
+```{r warning=F}
+#map is contained in the purrr package
+library(purrr)
+#Run the Descriptives function on variables 4 through 5 of the gapminder dataset
+map(gapminder[4:5], Descriptives)
+```
+
+We now have descriptive statistics on the variables life expectancy (*lifeExp*) and population (*pop*). In a future iteration of the function, having it display the output only once (rather than twice) would be the goal but for the time being it will suffice.
+
+Although these are informative values, one step going forward might be to compute inferential statistics. For instance we might want to test if life expectancy has been significantly increasing over study years. We can test this through a linear regression. 
+
+```{r}
+#Life expectency predicted by year
+summary(lm(lifeExp ~ year, data = gapminder))
+```
+
+We can see from this result that as time has progressed life expectancy has increased. We can turn this analysis into a function allowing us to then quickly compare the association between years and life expectancy for different countries.
+
+```{r}
+Reg <- function(y, x) {
+  Criterion <- (y)
+  Predictor <- (x)
+  the_fit <- lm(Criterion ~ Predictor)
+  summary(the_fit)
+}
+```
+
+This function when run on all countries should obtain the same result as above.
+
+```{r}
+Reg(gapminder$lifeExp, gapminder$year)
+```
+
+Having been assured, we can now specify to certain countries by *filtering*.
+
+```{r, warning=F, message=F}
+library(tidyverse)
+Canada_Minder <- gapminder %>% 
+filter(country == "Canada")
+
+Reg(Canada_Minder$lifeExp, Canada_Minder$year)
+```
+
+Evidently in Canada, as overall, with the passage of time life expectancy has increased.
+
+Just as we created a regression function, so can we create quadratic regression function.
+
+```{r}
+Quad_R <- function(x, y) {
+  Criterion <- na.omit(x)
+  Predictor <- na.omit(y)
+  Quadratic_Predictor <- y*y
+  the_fit <- lm(Criterion ~ Predictor + Quadratic_Predictor)
+  summary(the_fit)
+}
+```
+
+Let us apply this function to the same data as above
+
+```{r}
+Quad_R(Canada_Minder$lifeExp, Canada_Minder$year)
+```
+
+In the resulting model neither the linear nor quadratic slope are significant. 
+
+A better attempt at fitting a quadratic trend might be found when modelling North Korea. In an  [earlier assignment](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw04%20-%20Tables%2C%20data%20splitting%20and%20joining%2C%20cleaning%20and%20merging%20open%20data%20bases/hw4.Rmd) a plot was created showing life expectancy of both North and South Korea. The plot is reproduced below:
+
+![](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/raw/Side-Branch/hw04%20-%20Tables%2C%20data%20splitting%20and%20joining%2C%20cleaning%20and%20merging%20open%20data%20bases/hw4_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-9-1.png)
+
+Given that life expectancy increased until the early 1990s in North Korea and then descended, a quadratic model might be expected to fit.  
+
+```{r}
+NK_Minder <- gapminder %>% 
+filter(country == "Korea, Dem. Rep.")
+Quad_R(NK_Minder$lifeExp, NK_Minder$year)
+```
+
+
+The presence of a significant quadratic term here suggests that at lower levels of the predictor (years) there is a positive association between the passage of time and life expectancy. However, this relationship later changes such that at higher levels of the predictor, life expectancy decreased.
+
+&nbsp;
+
+------
+
+&nbsp;
+
+##Work with a nested data frame
+*Create a nested data frame and map a function over the list column holding the nested data. Use list extraction or other functions to pull interesting information out of these results and work your way back to a simple data frame you can visualize and explore.*
+
+*Here’s a fully developed prompt for Gapminder:*
+
+*See the split-apply-combine lesson from class.*
+*Nest the data by country (and continent).*
+*Fit a model of life expectancy against year. Possibly quadratic, possibly robust (see above prompt re: function writing).*
+*Use functions for working with fitted models or the broom package to get information out of your linear models.*
+*Use the usual dplyr, tidyr, and ggplot2 workflows to explore, e.g., the estimated cofficients.*
+*Inspiration for the modelling and downstream inspiration*
+
+------
+
+&nbsp;
+
+To begin this task, we will load all relevant libraries.
+
+```{r message=F, warning=F}
+#Load relevant libraries for the task
+library(broom)
+library(gapminder)
+library(tidyverse)
+library(ggplot2)
+```
+
+Working with the original data frame we will compute a new variable. Rather than having year (i.e. 1952, 1957, etc) we will instead create a variable that is the current year of study measurement minus 1952. This resulting variable will therefore tell us how many years since study inception have passed. This is not vital, and will not change the end models we obtain or their significance, but might help interpretation or sorting down the road. 
+
+```{r}
+gapminder$year_0 <- gapminder$year - 1952
+```
+
+Next we can create a quadratic term should we later wish to run a quadratic regression.
+
+```{r}
+gapminder$year_Q <- gapminder$year_0*gapminder$year_0
+```
+
+Before going further though, lets view that the variables we created. At the same time we can take note that the gapminder data frame may be a bit difficult to sift through.
+
+```{r}
+gapminder
+```
+
+There are for instance nearly 1,700 rows of data, many of which present the same country at different time points. Nesting the data might help us to create something more compact.
+
+```{r}
+gap_nested <- gapminder %>%
+    group_by(country, continent) %>% 
+    nest()
+
+gap_nested
+```
+
+Now we have a data frame in which every country appears once, and has an associated tibble in which are study variables (like population, life expectancy, etc).
+
+If desired we can for instance open the first tibble as follows.
+
+```{r}
+gap_nested[[1, "data"]]
+```
+
+Similarly we can look at the 50th country tibble:
+
+```{r}
+gap_nested[[50, "data"]]
+```
+
+One difficult aspect of this, is that we do not know what the 50th country is. The code below will inform us. 
+
+```{r}
+gap_nested$country[50]
+```
+
+A more useful approach however is to use the *which* function. 
+
+```{r}
+which(gap_nested$country == "Canada")
+```
+
+This informs us that the 21st country is Canada. We can double check this.
+
+```{r}
+gap_nested$country[21]
+```
+
+An implication of this, we can directly insert the *which* function to find the desired country tibble
+
+```{r}
+gap_nested[[which(gap_nested$country == "Canada"), "data"]]
+gap_nested[[which(gap_nested$country == "China"), "data"]]
+gap_nested[[which(gap_nested$country == "Bulgaria"), "data"]]
+```
+
+Next for this specific data structure we can create a function to model a quadratic regression. Here the criterion (thing being predicted) will be life expectancy and the predictors will be year of study measurement as a linear variable and quadratic variable.
+
+```{r}
+Quad_Reg <- function(df) {
+  lm(lifeExp ~ year_0 + year_Q, data = df)
+}
+```
+
+&nbsp;
+
+We can run this function on the first country within our data frame. 
+
+```{r}
+#Run the Quad_Reg function on the gap_nested data frame, for the first country and its values stored in 
+#"data" variable
+summary(Quad_Reg(gap_nested[[1, "data"]]))
+```
+
+Should we forget we can identify what the first country is just as above. 
+
+```{r}
+gap_nested$country[1]
+```
+
+Similarly we use the *which* function to directly insert by name a specific country. 
+
+```{r}
+summary(Quad_Reg(gap_nested[[which(gap_nested$country == "France"), "data"]]))
+```
+
+This approach allows us to easily run this function and model through numerous different countries.
+
+```{r}
+#Run the Quad_Reg function on the data variable of the 20th and 21st countries within gap_nested
+TwoCountries <- map(gap_nested$data[20:21], Quad_Reg)
+TwoCountries
+```
+
+Going a step further we can apply this function to every country. We will store this information in a variable by using the *mutate* function. This new variable will be called *fit* and will consist of the *data* variable being run through the *Quad_Reg* function.
+
+```{r}
+(gap_nested <- gap_nested %>% 
+    mutate(fit = map(data, Quad_Reg)))
+```
+
+Now we can open the first countries regression result through *tidy*.
+
+```{r}
+tidy(gap_nested$fit[[1]])
+```
+
+As before we can unpack the results of any country we want by number or name.
+
+```{r}
+tidy(gap_nested$fit[[which(gap_nested$country == "Spain")]])
+```
+
+Rather than unpacking each country individually however, we can unpack all model results at once. To do so we will create a new variable called *results* in which each countries *fit* variable is run through the *tidy* function. 
+
+```{r}
+(gap_nested <- gap_nested %>% 
+    mutate(results = map(fit, tidy)))
+```
+
+Then we can unnest this data frame.
+
+```{r}
+(gap_coefs <- gap_nested %>% 
+    select(continent, country, results) %>% 
+    unnest(results))
+```
+
+And the resulting data frame has every countries linear slope, quadratic slope and intercept under the *estimate* variable, as indexed by the *term* variable. 
+
+```{r}
+gap_coefs
+```
+
+If desired, we can unpack this further through the use of *spread* 
+
+```{r}
+(gap_ests <- gap_coefs %>% 
+    select(continent:estimate) %>% 
+    spread(key = term, value = estimate))
+```
+
+Now rather than there being a variable that indexes intercepts and slopes they each have their own column. We can also rename these columns for ease of reading.
+
+```{r}
+colnames(gap_ests) <- c("Continent", "Country", "Intercept", "YearLinearSlope", "YearQuadraticSlope")
+```
+
+A final test to ensure nothing crashes and reasonable values are provided.
+
+```{r}
+gap_ests %>% 
+  select(Intercept, YearLinearSlope, YearQuadraticSlope) %>% 
+  summary()
+```
+
+&nbsp;
+
+------
+
+&nbsp;
+
+
+With all of this completed we can visually explore the data.  
+
+```{r}
+#Aesthetic Preference
+a_theme = theme(panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), 
+                panel.background = element_blank(), 
+                legend.key = element_blank(),
+                axis.line = element_line(color = "black"))
+
+ggplot(gap_coefs, aes(x = estimate)) +
+  geom_density() + facet_wrap(~ term, scales = "free") +
+  a_theme
+```
+
+Visible from here quadratic values appear somewhat leptokurtic in distribution shape whereas whereas linear values are more evenly distributed. We can identify through our data frame which countries had a particularly curvilinear relationship for study years and life expectancy. We can do this by sorting quadratic slopes in ascending order.
+
+```{r}
+gap_ests %>%
+arrange((YearQuadraticSlope))
+```
+
+Zimbabwe, Swaziland and Botswana all had the fairly high linear slopes and had particularly negative quadratic slopes. We could anticipate that if graphed these countries will show a life expectancy increase during early study years and then a decline in latter years.
+
+```{r}
+#Organize from the raw data
+gapminder %>%
+group_by(year) %>%
+filter(country == "Zimbabwe" | country == "Swaziland" | country == "Botswana") %>%
+select(country, year, lifeExp) %>%  
+  
+#Data plotting  
+ggplot(aes(x = year, y = lifeExp, group = country))+
+geom_point(aes(color = country), size = 2) + 
+geom_line(aes(color = country))+
+scale_color_manual(values=c("cornflowerblue", "coral3", "plum"), name = "Country")+ #Select colors I like
+xlab("Year")+ #Rename X axis
+ylab("Life Expectancy")+ #Rename Y Axis
+scale_y_continuous(expand= c(0,0), breaks=seq(35,70,5), lim = c(35,70)) + #Set Y axis increments and range
+scale_x_continuous(breaks=seq(1952,2007,5), lim = c(1952,2007)) + #Set X axis increments and range
+a_theme
+```
+
+Up until the early 1990s all three countries were seeing a life expectancy increase, however, soon after life expectancy drastically dropped. Markedly, the lowest life expectancy on record for Zimbabwe occurred during the final year of study measurement. Swaziland although showing potential signs of recovery also had lower expectancy at study end than at study start. 
+
+Given this a quadratic model would be expected to fit substantially better for these countries than a linear one. 
+
+```{r}
+Linear_Reg <- function(df) {
+  lm(lifeExp ~ year_0, data = df)
+}
+
+summary(Linear_Reg(gap_nested[[which(gap_nested$country == "Zimbabwe"), "data"]]))
+summary(Linear_Reg(gap_nested[[which(gap_nested$country == "Swaziland"), "data"]]))
+summary(Linear_Reg(gap_nested[[which(gap_nested$country == "Botswana"), "data"]]))
+```
+
+For all three countries a linear model fit poorly and was not significant. 
+
+```{r}
+summary(Quad_Reg(gap_nested[[which(gap_nested$country == "Zimbabwe"), "data"]]))
+summary(Quad_Reg(gap_nested[[which(gap_nested$country == "Swaziland"), "data"]]))
+summary(Quad_Reg(gap_nested[[which(gap_nested$country == "Botswana"), "data"]]))
+```
+
+When a quadratic term was introduced however the fit of all models substantially improved. All models were now significant and as were all predictors for each model. All models also saw a sharp increase in multiple r-squared.
+
+Lastly lets consider which countries had the largest standard error and how life expectancy in these countries changed over time. 
+
+```{r}
+gap_coefs %>%
+arrange(desc(std.error))
+```
+
+Let us graph from this Rwanda.
+
+```{r}
+#Organize from the raw data
+gapminder %>%
+group_by(year) %>%
+filter(country == "Rwanda") %>%
+select(country, year, lifeExp) %>%  
+  
+#Data plotting  
+ggplot(aes(x = year, y = lifeExp, group = country))+
+geom_point(aes(color = country), size = 2) + 
+geom_line(aes(color = country))+
+scale_color_manual(values=c("cornflowerblue"), name = "Country")+ #Select colors I like
+xlab("Year")+ #Rename X axis
+ylab("Life Expectancy")+ #Rename Y Axis
+scale_y_continuous(expand= c(0,0), breaks=seq(20,55,5), lim = c(20,55)) + #Set Y axis increments and range
+scale_x_continuous(breaks=seq(1952,2007,5), lim = c(1952,2007)) + #Set X axis increments and range
+a_theme
+```
+
+During early study years Rwanda life expectancy was increasing. However, a massive drop followed after 1987 such that mean life expectancy fell below 25 years. In the following years, an ascension is visible.
