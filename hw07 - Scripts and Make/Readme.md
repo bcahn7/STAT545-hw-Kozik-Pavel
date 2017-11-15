@@ -5,7 +5,7 @@ Here is a [link to the final md file of homework 7](https://github.com/Kozp/STAT
 Regardless of whether the *master R script*, or *make file* were used, both produced the same output md. In either case data was first downloaded via [Script1_Download.R](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw07%20-%20Scripts%20and%20Make/Script1_Download.R). Data were then cleaned, organized, and sorted into a coherent and manageable structure through [Script2_DataCleaning_and_prep.R](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw07%20-%20Scripts%20and%20Make/Script2_DataCleaning_and_prep.R). Next visualizations were created and saved by running data through [Script3_Visualization.R](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw07%20-%20Scripts%20and%20Make/Script3_Visualization.R). Lastly, the visualizations were presented with text and interpretation through an R markdown file called [Script4_Report.Rmd](https://github.com/Kozp/STAT545-hw-Kozik-Pavel/blob/Side-Branch/hw07%20-%20Scripts%20and%20Make/Script4_Report.Rmd).
 
 
-###Progress Report
+### Progress Report
 
 The task was an enjoyable one in that, should my interpretation be correct, we had free reign to find a data set we were interested in and were free to determine what analysis we conducted. I used this opportunity to look at [Vancouver census data](http://data.vancouver.ca/datacatalogue/index.htm) of which I had known and was interested in but had lacked an opportunity to capitalize on. Similarly choosing what variables were of interest and what question to persue allowed for an air of freedom. 
 
